@@ -14,7 +14,26 @@ public class Main {
 		
 		cuenta2.agregarSaldo(5000);
 		
+		/////////////////////////////////////
+		
+		Destino destino1 = new Destino("Bariloche", 1443);
+		Destino destino2 = new Destino("CABA", 413.9);
+		terminal1.getAdmin().agregarDestino(destino1, terminal1.getListaDeDestinos());
+		terminal1.getAdmin().agregarDestino(destino2, terminal1.getListaDeDestinos());
+	
+		/////////////////////////////////////
+		
+		terminal1.getAdmin().quitarDestino(0, terminal1.getListaDeDestinos());
+		
+		//////////////////////////////////////
+		
+		System.out.println(terminal1.getListaDeDestinos());
+		
+		System.out.println("\n\n\n");
+		
 		System.out.println(terminal1);
+		
+		
 		
 	}
 }

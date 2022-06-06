@@ -1,5 +1,4 @@
 package cuenta;
-
 import java.util.ArrayList;
 
 import app.Destino;
@@ -21,11 +20,27 @@ public class CuentaAdmin extends Cuenta{
 	
 	
 	public void agregarDestino(Destino destinoNuevo, ArrayList<Destino> destinos) {
-		
+		if(destinoNuevo != null) {
+			if(destinos.contains(destinos)) {
+				System.out.println("Este destino ya esta cargado en el sistema!");
+			}
+			else{
+				destinos.add(destinoNuevo);
+				System.out.println("Destino cargado exitosamente!");
+			}
+		}
 	}
 	
-	public void quitarDestino(int indiceDeDestino) {////indiceDeDestino seria la posicion que ocupa el destino que se desea eliminar en la listaDeDestinos de la terminal.
-		///todo;
+	public void quitarDestino(int indiceDestino, ArrayList<Destino> destinos) {////indiceDeDestino seria la posicion que ocupa el destino que se desea eliminar en la listaDeDestinos de la terminal.
+		if(destinos!=null) {
+			if(destinos.get(indiceDestino) != null) {
+				destinos.remove(indiceDestino);
+				System.out.println("Destino eliminado exitosamente!");
+			}
+			else {
+				System.out.println("No se encuentra ese destino en la base de datos!");
+			}
+		}
 	}
 	
 	public void agregarTren(Tren trenNuevo) {

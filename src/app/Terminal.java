@@ -1,5 +1,4 @@
 package app;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +49,63 @@ public class Terminal implements Serializable{
 				this.mapDeCuentas.put(nuevaCuenta.getUser(), nuevaCuenta);
 			}
 		}
+	}
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public int getRecaudacion() {
+		return recaudacion;
+	}
+
+	public void setRecaudacion(int recaudacion) {
+		this.recaudacion = recaudacion;
+	}
+
+	public CuentaAdmin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(CuentaAdmin admin) {
+		this.admin = admin;
+	}
+
+	public ArrayList<Destino> getListaDeDestinos() {
+		return listaDeDestinos;
+	}
+
+	public void setListaDeDestinos(ArrayList<Destino> listaDeDestinos) {
+		this.listaDeDestinos = listaDeDestinos;
+	}
+
+	public ArrayList<Tren> getListaDeTrenes() {
+		return listaDeTrenes;
+	}
+
+	public void setListaDeTrenes(ArrayList<Tren> listaDeTrenes) {
+		this.listaDeTrenes = listaDeTrenes;
+	}
+
+	public HashMap<String, Cuenta> getMapDeCuentas() {
+		return mapDeCuentas;
+	}
+
+	public void setMapDeCuentas(HashMap<String, Cuenta> mapDeCuentas) {
+		this.mapDeCuentas = mapDeCuentas;
 	}
 	
 }
