@@ -20,6 +20,23 @@ public class Cuenta extends Persona{
 	public void agregarSaldo(int dinero) {
 		this.saldo += dinero;
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getName() + " {\n\tuser: " + user + "\n\tpass: " + pass + "\n\tsaldo: " + saldo + "\n}";
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public int getSaldo() {
+		return saldo;
+	}
 	
 	
 	

@@ -13,9 +13,9 @@ public class Terminal implements Serializable{
 	private String nombre;
 	private String direccion;
 	private int recaudacion;
-	ArrayList<Destino> listaDeDestinos;
-	ArrayList<Tren> listaDeTrenes;
-	HashMap<String, Cuenta> mapDeCuentas;
+	private ArrayList<Destino> listaDeDestinos;
+	private ArrayList<Tren> listaDeTrenes;
+	private HashMap<String, Cuenta> mapDeCuentas;
 	
 	public Terminal() {
 		this.listaDeDestinos = new ArrayList<Destino>();
@@ -36,6 +36,17 @@ public class Terminal implements Serializable{
 		return getClass().getName() + " {\n\tnombre: " + nombre + "\n\tdireccion: " + direccion + "\n\trecaudacion: "
 				+ recaudacion + "\n\tlistaDeDestinos: " + listaDeDestinos + "\n\tlistaDeTrenes: " + listaDeTrenes
 				+ "\n\tmapDeCuentas: " + mapDeCuentas + "\n}";
+	}
+	
+	public void agregarCuenta(Cuenta nuevaCuenta) {
+		if(nuevaCuenta != null) {
+			if(this.mapDeCuentas.containsKey(nuevaCuenta.getUser())) {
+				System.out.println("Este usuario ya ha sido tomado!");
+			}
+			else{
+				this.mapDeCuentas.put(nuevaCuenta.getUser(), nuevaCuenta);
+			}
+		}
 	}
 	
 }
