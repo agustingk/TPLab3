@@ -13,6 +13,11 @@ public class CuentaAdmin extends Cuenta{
 		super();
 	}
 	
+	public CuentaAdmin(String nombre, String apellido, int edad, String user, String pass) {
+		super(nombre, apellido, edad, user, pass);
+	}
+	
+	
 	public void agregarDestino(Destino destinoNuevo) {
 		///todo;
 	}
