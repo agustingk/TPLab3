@@ -1,15 +1,15 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import cuenta.Cuenta;
 import tren.Tren;
 
 ///Terminal:
 ///Se crea al ejecutar por primera vez el codigo (hace un chequeo de si el archivo "terminal.bin" existe, en caso de no encontrarlo se supone que es la primera vez ejecutando el programa)
-///Contiene una lista de destinos, lista de trenes y un hashmap que contiene "user" como key y el objeto Cliente como value;
-public class Terminal {
+///Contiene una lista de Destinos, lista de Trenes y un hashmap que contiene "user" como key y el objeto Cliente como value;
+public class Terminal implements Serializable{
 	private String nombre;
 	private String direccion;
 	private int recaudacion;
@@ -22,4 +22,20 @@ public class Terminal {
 		this.listaDeTrenes = new ArrayList<Tren>();
 		this.mapDeCuentas = new HashMap<String, Cuenta>();
 	}
+	
+	public Terminal(String nombre, String direc) {
+		this.nombre = nombre;
+		this.direccion = direc;
+		this.listaDeDestinos = new ArrayList<Destino>();
+		this.listaDeTrenes = new ArrayList<Tren>();
+		this.mapDeCuentas = new HashMap<String, Cuenta>();
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getName() + " {\n\tnombre: " + nombre + "\n\tdireccion: " + direccion + "\n\trecaudacion: "
+				+ recaudacion + "\n\tlistaDeDestinos: " + listaDeDestinos + "\n\tlistaDeTrenes: " + listaDeTrenes
+				+ "\n\tmapDeCuentas: " + mapDeCuentas + "\n}";
+	}
+	
 }

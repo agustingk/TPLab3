@@ -1,5 +1,7 @@
 package cuenta;
 
+import java.util.ArrayList;
+
 import app.Destino;
 import tren.Tren;
 
