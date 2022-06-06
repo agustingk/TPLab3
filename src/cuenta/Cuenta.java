@@ -1,4 +1,4 @@
-package Cuentas;
+package cuenta;
 
 ////Vendria a ser el "pasajero" que compra boletos online a los destinos disponibles.
 public class Cuenta {

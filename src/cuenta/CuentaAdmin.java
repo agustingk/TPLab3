@@ -1,7 +1,7 @@
-package Cuentas;
+package cuenta;
 
-import Trenes.Tren;
 import app.Destino;
+import tren.Tren;
 
 ////vendria a ser la primera Cuenta creada y por consecuencia la del indice "0" en la listaDeCuentas de la terminal.
 ////Cuenta con metodos extra.

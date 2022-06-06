@@ -3,8 +3,8 @@ package app;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Cuentas.Cuenta;
-import Trenes.Tren;
+import cuenta.Cuenta;
+import tren.Tren;
 
 ///Terminal:
 ///Se crea al ejecutar por primera vez el codigo (hace un chequeo de si el archivo "terminal.bin" existe, en caso de no encontrarlo se supone que es la primera vez ejecutando el programa)

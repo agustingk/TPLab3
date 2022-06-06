@@ -1,4 +1,4 @@
-package Trenes;
+package tren;
 
 ///Simple clase Tren que tiene un nombre de modelo, año de fabricacion
 public class Tren {
