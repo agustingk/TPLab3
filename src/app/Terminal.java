@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import cuenta.Cuenta;
+import cuenta.CuentaAdmin;
 import tren.Tren;
 
 ///Terminal:
@@ -13,6 +14,7 @@ public class Terminal implements Serializable{
 	private String nombre;
 	private String direccion;
 	private int recaudacion;
+	private CuentaAdmin admin;
 	private ArrayList<Destino> listaDeDestinos;
 	private ArrayList<Tren> listaDeTrenes;
 	private HashMap<String, Cuenta> mapDeCuentas;
@@ -23,21 +25,22 @@ public class Terminal implements Serializable{
 		this.mapDeCuentas = new HashMap<String, Cuenta>();
 	}
 	
-	public Terminal(String nombre, String direc) {
+	public Terminal(String nombre, String direc, CuentaAdmin cuentaAdmin) {
+		this.admin = cuentaAdmin;
 		this.nombre = nombre;
 		this.direccion = direc;
 		this.listaDeDestinos = new ArrayList<Destino>();
 		this.listaDeTrenes = new ArrayList<Tren>();
 		this.mapDeCuentas = new HashMap<String, Cuenta>();
 	}
-
+	
 	@Override
 	public String toString() {
 		return getClass().getName() + " {\n\tnombre: " + nombre + "\n\tdireccion: " + direccion + "\n\trecaudacion: "
-				+ recaudacion + "\n\tlistaDeDestinos: " + listaDeDestinos + "\n\tlistaDeTrenes: " + listaDeTrenes
-				+ "\n\tmapDeCuentas: " + mapDeCuentas + "\n}";
+				+ recaudacion + "\n\tadmin: " + admin + "\n\tlistaDeDestinos: " + listaDeDestinos
+				+ "\n\tlistaDeTrenes: " + listaDeTrenes + "\n\tmapDeCuentas: " + mapDeCuentas + "\n}";
 	}
-	
+
 	public void agregarCuenta(Cuenta nuevaCuenta) {
 		if(nuevaCuenta != null) {
 			if(this.mapDeCuentas.containsKey(nuevaCuenta.getUser())) {

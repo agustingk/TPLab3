@@ -20,8 +20,8 @@ public class CuentaAdmin extends Cuenta{
 	}
 	
 	
-	public void agregarDestino(Destino destinoNuevo) {
-		///todo;
+	public void agregarDestino(Destino destinoNuevo, ArrayList<Destino> destinos) {
+		
 	}
 	
 	public void quitarDestino(int indiceDeDestino) {////indiceDeDestino seria la posicion que ocupa el destino que se desea eliminar en la listaDeDestinos de la terminal.
