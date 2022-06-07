@@ -15,7 +15,7 @@ public class CuentaLight extends Cuenta{
 	
 	
 	@Override
-	public Boleto sacarBoleto() {
+	public Boleto sacarBoleto() {///Resta el costo del Boleto normalmente.
 		// TODO Auto-generated method stub
 		return null;
 	}

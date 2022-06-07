@@ -68,8 +68,36 @@ public class CuentaAdmin extends Cuenta{
 		}
 	}
 	
-	public void iniciarViaje(int indiceDeTren) {////indiceDeTren seria la posicion que ocupa el tren el cual inicia el viaje en la listaDeTrenes de la terminal. Cambia su estado de enViaje de false a true.
-		///todo;
+	public void iniciarViaje(int indiceDeTren, ArrayList<Tren> trenes) {////indiceDeTren seria la posicion que ocupa el tren el cual inicia el viaje en la listaDeTrenes de la terminal. Cambia su estado de enViaje de false a true.
+		if(trenes != null) {
+			if(trenes.get(indiceDeTren)!=null) {
+				if(trenes.get(indiceDeTren).getEnViaje() == true) {
+					System.out.println("Este tren ya se encuentra en viaje!");
+				}
+				else {
+					trenes.get(indiceDeTren).setEnViaje(true);					
+				}
+			}
+			else{
+				System.out.println("No se encuentra ese tren en la terminal! Revise bien los datos.");
+			}
+		}
+	}
+	
+	public void terminarViaje(int indiceDeTren, ArrayList<Tren> trenes) {
+		if(trenes!=null) {
+			if(trenes.get(indiceDeTren)!=null) {
+				if(trenes.get(indiceDeTren).getEnViaje()==false) {
+					System.out.println("Este tren no puede terminar viaje ya que no se encuentra en uno!");
+				}
+				else {
+					trenes.get(indiceDeTren).setEnViaje(false);
+				}
+			}
+			else {
+				System.out.println("No se encuentra ese tren en la terminal! Revise bien los datos.");
+			}
+		}
 	}
 	
 	public void generarFileJsonDeCuentas() {///genera un archivo json con los datos de las cuentas.

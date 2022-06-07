@@ -24,6 +24,11 @@ public class Tren {
 				+ "\n\tenViaje: " + enViaje + "\n\tdistanciaMaxima: " + distanciaMaxima + "\n";
 	}
 	
+	public void setEnViaje(boolean enViaje) {
+		this.enViaje = enViaje;
+	}
 	
-	
+	public boolean getEnViaje() {
+		return this.enViaje;
+	}
 }

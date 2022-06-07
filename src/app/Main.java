@@ -57,8 +57,9 @@ public class Main {
 		
 		//////////////////////////////////////
 		
-		System.out.println(terminal1);
+		cuentaAdmin.iniciarViaje(0, terminal1.getListaDeTrenes());
 		
+		System.out.println(terminal1.getListaDeTrenes());
 		
 	}
 }

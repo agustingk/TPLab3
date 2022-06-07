@@ -10,7 +10,7 @@ public class CuentaPro extends Cuenta{
 		super(nombre, apellido, edad, user, pass, genero, dni);
 	}
 	
-	public Boleto sacarBoleto() {
+	public Boleto sacarBoleto() {///Resta el costo del Boleto al saldo pero recibe un descuento.
 		return null;
 	}
 }
