@@ -1,4 +1,4 @@
-package cuenta;
+package app;
 
 public class Menu {
 	
