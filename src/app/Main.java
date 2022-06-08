@@ -16,8 +16,7 @@ public class Main {
 		
 		CuentaLight cuenta2 = new CuentaLight("Jose", "Perez", 17, "Jose05", "1234", 'm', "45222154");
 		cuenta2.agregarSaldo(5000);
-		cuenta2.agregarSaldo(8800);
-		
+		cuenta2.agregarSaldo(890000);
 		
 		Cuenta cuenta3 = new CuentaPro("Jose", "Perez", 17, "Jose05", "1234", 'm', "45222154");
 		cuenta3.agregarSaldo(1000);
