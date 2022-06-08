@@ -7,7 +7,7 @@ import app.Destino;
 import tren.Tren;
 
 ////Vendria a ser el "pasajero" que compra boletos online a los destinos disponibles.
-///No se usa esta clase en si sino sus clases hijas "ClaseLight" y "ClasePro"
+///No se usa esta clase en si sino sus clases hijas "ClaseLight", "ClasePro" y UN "ClaseAdmin".
 public abstract class Cuenta extends Persona{
 	private String user;
 	private String pass;
