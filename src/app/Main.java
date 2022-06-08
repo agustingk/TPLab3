@@ -18,7 +18,7 @@ public class Main {
 		cuenta2.agregarSaldo(5000);
 		
 		Cuenta cuenta3 = new CuentaPro("Jose", "Perez", 17, "Jose05", "1234", 'm', "45222154");
-		
+		cuenta3.agregarSaldo(1000);
 		terminal1.agregarCuenta(cuenta2);
 		terminal1.agregarCuenta(cuenta3);
 		
