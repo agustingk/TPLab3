@@ -12,7 +12,7 @@ import tren.Tren;
 public class Terminal implements Serializable{
 	private String nombre;
 	private String direccion;
-	private int recaudacion;
+	private double recaudacion;
 	private CuentaAdmin admin;
 	private ArrayList<Destino> listaDeDestinos;
 	private ArrayList<Tren> listaDeTrenes;
@@ -68,7 +68,7 @@ public class Terminal implements Serializable{
 		this.direccion = direccion;
 	}
 
-	public int getRecaudacion() {
+	public double getRecaudacion() {
 		return recaudacion;
 	}
 
