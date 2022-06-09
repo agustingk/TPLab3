@@ -5,12 +5,12 @@ public abstract class Persona {
 	private String dni;
 	private String nombre;
 	private String apellido;
-	private char genero;///m o f
-	
+	private char genero;/// m o f
+
 	public Persona() {
-		
+
 	}
-	
+
 	public Persona(String nombre, String apellido, int edad, char genero, String dni) {
 		this.dni = dni;
 		this.nombre = nombre;

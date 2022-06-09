@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-
 public class JsonUtiles {
 	public static void grabar(JSONArray array) {
 		try {
@@ -22,15 +21,11 @@ public class JsonUtiles {
 		}
 	}
 
-	public static String leer(String file) 
-	{
+	public static String leer(String file) {
 		String contenido = "";
-		try 
-		{
+		try {
 			contenido = new String(Files.readAllBytes(Paths.get(file + ".json")));
-		} 
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return contenido;

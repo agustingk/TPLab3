@@ -4,11 +4,11 @@ package app;
 public class Destino {
 	private String nombreDeDestino;
 	private double distanciaEnKilometros;
-	
+
 	public Destino() {
-		
+
 	}
-	
+
 	public Destino(String nombre, double distancia) {
 		this.distanciaEnKilometros = distancia;
 		this.nombreDeDestino = nombre;
@@ -35,5 +35,5 @@ public class Destino {
 	public void setDistanciaEnKilometros(float distanciaEnKilometros) {
 		this.distanciaEnKilometros = distanciaEnKilometros;
 	}
-	
+
 }
