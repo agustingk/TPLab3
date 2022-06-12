@@ -16,6 +16,7 @@ public abstract class Cuenta extends Persona {
 	private ArrayList<Boleto> listaDeBoletos;
 
 	public Cuenta() {
+		////
 	}
 
 	public Cuenta(String nombre, String apellido, int edad, String user, String pass, char genero, String dni) {
