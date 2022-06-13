@@ -1,11 +1,13 @@
 package app;
 
+import java.io.Serializable;
+
 import cuenta.Persona;
 import tren.Tren;
 
 ///Esta clase funciona como conexion entre el Destino y el Tren que se elije para el viaje por medio del metodo sacarPasaje() de la clase Cuenta.
 ///Dependiendo de a donde se quiera ir, ciertos Trenes no podran ser seleccionados. Todo depende del Destino seleccionado por la Cuenta.
-public class Boleto {
+public class Boleto implements Serializable{
 	private Destino destinoDelViaje;
 	private Tren trenSeleccionado;
 	private int indiceTren;//// Es el indice que tiene el tren en la listaDeTrenes de la Terminal. Es para

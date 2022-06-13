@@ -1,7 +1,9 @@
 package app;
 
+import java.io.Serializable;
+
 ////Clase que cuenta con los atributos de nombre y distancia de los destinos en referencia a la ciudad de Mar del Plata.
-public class Destino {
+public class Destino implements Serializable{
 	private String nombreDeDestino;
 	private double distanciaEnKilometros;
 

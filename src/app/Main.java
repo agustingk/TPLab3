@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		CuentaAdmin cuentaAdmin = new CuentaAdmin("Lucas", "Moreno", 43, "Lucas01", "1234", 'm', "25266511");
+		/*CuentaAdmin cuentaAdmin = new CuentaAdmin("Lucas", "Moreno", 43, "Lucas01", "1234", 'm', "25266511");
 		Terminal terminal1 = new Terminal("MDQ", "San Juan 1234", cuentaAdmin);
 
 		CuentaLight cuenta2 = new CuentaLight("Jose", "Perez", 17, "Jose05", "1234", 'm', "45222154");
@@ -82,5 +82,17 @@ public class Main {
 		
 		//System.out.println(JsonUtiles.leer("jsonCuentas"));
 		
+		FileUtiles.grabarTerminal(terminal1);
+		*/
+		
+		//Terminal terminalDeFile = FileUtiles.leerTerminal();
+		
+		Terminal terminalDeFile = new Terminal();
+		
+		System.out.println(terminalDeFile + "\n\n" + "----------------------------------------" + "\n\n");
+		
+		terminalDeFile = FileUtiles.leerTerminal();
+		
+		System.out.println(terminalDeFile);
 	}
 }

@@ -1,6 +1,8 @@
 package cuenta;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
 	private int edad;
 	private String dni;
 	private String nombre;

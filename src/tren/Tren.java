@@ -1,7 +1,9 @@
 package tren;
 
+import java.io.Serializable;
+
 ///Simple clase Tren que tiene un nombre de modelo, a�o de fabricacion, distancia maxima posible y un estado "enViaje" que se modifica por la CuentaAdmin cuando se inicia un viaje con el mismo.
-public class Tren {
+public class Tren implements Serializable{
 	private String modelo;
 	private int anioFabricacion;
 	private int distanciaMaxima;

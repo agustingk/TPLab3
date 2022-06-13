@@ -1,5 +1,6 @@
 package cuenta;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import app.Boleto;
@@ -8,7 +9,7 @@ import tren.Tren;
 
 ////Vendria a ser el "pasajero" que compra boletos online a los destinos disponibles.
 ///No se usa esta clase en si sino sus clases hijas "ClaseLight", "ClasePro" y UN "ClaseAdmin".
-public abstract class Cuenta extends Persona {
+public abstract class Cuenta extends Persona implements Serializable{
 	private String user;
 	private String pass;
 	private int saldo;/// saldo que es 0 al crear la cuenta peeeeero se puede ingresar dinero al mismo
@@ -33,14 +34,11 @@ public abstract class Cuenta extends Persona {
 		}
 	}
 	
-	
 	public abstract Boleto sacarBoleto();//// este metodo abstracto va a depender de cada subclase.
 
 	public void agregarSaldo(int dinero) {
 		this.saldo += dinero;
 	}
-
-	
 
 	@Override
 	public String toString() {
