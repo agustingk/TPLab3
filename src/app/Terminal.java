@@ -107,4 +107,8 @@ public class Terminal implements Serializable {
 		this.mapDeCuentas = mapDeCuentas;
 	}
 
+	public void actualizarFile() {
+		FileUtiles.grabarTerminal(this);
+	}
+	
 }

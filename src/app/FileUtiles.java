@@ -18,7 +18,6 @@ import java.nio.file.Paths;
 public class FileUtiles {
 	
 	public static void grabarTerminal(Terminal terminal) {
-		DataInputStream dataInputStream = null;
 		DataOutputStream dataOutputStream = null;
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream("terminal.bin"); //bytes
@@ -53,7 +52,6 @@ public class FileUtiles {
 	public static Terminal leerTerminal() {
 		Terminal contenido = new Terminal();
 		DataInputStream dataInputStream = null;
-		DataOutputStream dataOutputStream = null;
 		
 		try {
 			FileInputStream fileInputStream = new FileInputStream("terminal.bin");
@@ -79,9 +77,11 @@ public class FileUtiles {
 		{
 			//System.out.println("FIN de archivo");
 		}
-		catch (FileNotFoundException e)
+		catch (FileNotFoundException e)/// si el archivo no se encuentra, lo crea con una terminal VACIA.
 		{
-			e.printStackTrace();
+			Terminal terminalVacia = new Terminal();
+			FileUtiles.grabarTerminal(terminalVacia);
+			//e.printStackTrace();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
