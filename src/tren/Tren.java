@@ -31,4 +31,29 @@ public class Tren {
 	public boolean getEnViaje() {
 		return this.enViaje;
 	}
+	
+	public String getModelo() {
+		return this.modelo;
+	}
+
+	public int getAnioFabricacion() {
+		return anioFabricacion;
+	}
+
+	public void setAnioFabricacion(int anioFabricacion) {
+		this.anioFabricacion = anioFabricacion;
+	}
+
+	public int getDistanciaMaxima() {
+		return distanciaMaxima;
+	}
+
+	public void setDistanciaMaxima(int distanciaMaxima) {
+		this.distanciaMaxima = distanciaMaxima;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+	
 }

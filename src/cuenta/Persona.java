@@ -23,6 +23,30 @@ public abstract class Persona {
 		return edad;
 	}
 
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public char getGenero() {
+		return genero;
+	}
+
+	public void setGenero(char genero) {
+		this.genero = genero;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
@@ -33,6 +57,11 @@ public abstract class Persona {
 
 	public String getApellido() {
 		return apellido;
+	}
+
+	public String mostrarPersona() {
+		return getClass().getName() + " {\n\tedad: " + edad + "\n\tdni: " + dni + "\n\tnombre: " + nombre
+				+ "\n\tapellido: " + apellido + "\n\tgenero: " + genero + "\n}";
 	}
 
 }

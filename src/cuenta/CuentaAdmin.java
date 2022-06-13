@@ -1,6 +1,18 @@
 package cuenta;
 
+import java.io.DataInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import json.JsonUtiles;
 
 import app.Boleto;
 import app.Destino;
@@ -99,12 +111,70 @@ public class CuentaAdmin extends Cuenta {
 		}
 	}
 
-	public void generarFileJsonDeCuentas() {/// genera un archivo json con los datos de las cuentas.
-		/// todo;
+	public void exportarFileJsonDeCuentas(HashMap<String, Cuenta> cuentas) {/// genera un archivo json con los datos de las cuentas.
+		if(cuentas!=null) {
+			int cont=0;
+			
+			JSONArray jsonArray = new JSONArray();
+			
+			for(HashMap.Entry<String, Cuenta> entry : cuentas.entrySet()) {
+				try {
+					JSONObject cuenta = new JSONObject();
+					cuenta.put("user", entry.getKey());
+					cuenta.put("pass", entry.getValue().getPass());
+					cuenta.put("saldo", entry.getValue().getSaldo());
+					
+					JSONArray boletos = new JSONArray();
+					ArrayList<Boleto> boletosArray = entry.getValue().getListaDeBoletos();
+					for(int i=0; i < boletosArray.size();i++) {
+						JSONObject boleto = new JSONObject();
+						boleto.put("destino", boletosArray.get(i).getDestinoDelViaje().getNombreDeDestino());
+						boleto.put("tren", boletosArray.get(i).getTrenSeleccionado().getModelo());
+						boleto.put("indice", boletosArray.get(i).getIndiceTren());
+						boleto.put("dueño", boletosArray.get(i).getPersona().getNombre() + " " + boletosArray.get(i).getPersona().getApellido());
+						boleto.put("precio", boletosArray.get(i).getPrecio());
+						boleto.put("vencido", boletosArray.get(i).isVencido());
+						boletos.put(i, boleto);
+					}
+					
+					try{
+						cuenta.put("boletos", boletos);
+					}
+					catch(JSONException e) {
+						System.out.println("Se rompio todo");
+					}
+					
+					jsonArray.put(cont, cuenta);
+					cont++;
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				JsonUtiles.grabar(jsonArray, "jsonCuentas");
+				
+			}
+			
+		}
 	}
 
-	public void generarFileJsonDeTrenes() {/// genera un archivo json con los datos de los trenes.
-		/// todo;
+	public void exportarFileJsonDeTrenes(ArrayList<Tren> trenes) {/// genera un archivo json con los datos de los trenes.
+		if(trenes!=null) {
+			JSONArray jsonArray = new JSONArray();
+			for(int i=0; i < trenes.size();i++) {
+				JSONObject tren = new JSONObject();
+				try {
+					tren.put("modelo", trenes.get(i).getModelo());
+					tren.put("anioDeFabricacion", trenes.get(i).getAnioFabricacion());
+					tren.put("distanciaMaxima", trenes.get(i).getDistanciaMaxima());
+					tren.put("enViaje", trenes.get(i).getEnViaje());
+					jsonArray.put(i, tren);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			JsonUtiles.grabar(jsonArray, "jsonTrenes");
+		}
 	}
 
 	@Override

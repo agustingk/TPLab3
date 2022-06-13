@@ -27,15 +27,25 @@ public abstract class Cuenta extends Persona {
 		this.listaDeBoletos = new ArrayList<Boleto>();
 	}
 
+	public void agregarBoleto(Boleto boleto) {
+		if(boleto!=null) {
+			this.listaDeBoletos.add(boleto);
+		}
+	}
+	
+	
 	public abstract Boleto sacarBoleto();//// este metodo abstracto va a depender de cada subclase.
 
 	public void agregarSaldo(int dinero) {
 		this.saldo += dinero;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return getClass().getName() + " {\n\tuser: " + user + "\n\tpass: " + pass + "\n\tsaldo: " + saldo + "\n}";
+		return getClass().getName() + " {\n\tuser: " + user + "\n\tpass: " + pass + "\n\tsaldo: " + saldo
+				+ "\n\tlistaDeBoletos: " + this.mostrarListaDeBoletos() + "\n}";
 	}
 
 	public String getUser() {
@@ -56,6 +66,14 @@ public abstract class Cuenta extends Persona {
 
 	public String mostrarListaDeDestinos(ArrayList<Destino> destinos) {
 		return destinos.toString();
+	}
+	
+	public String mostrarListaDeBoletos() {
+		return this.listaDeBoletos.toString();
+	}
+	
+	public ArrayList<Boleto> getListaDeBoletos() {
+		return this.listaDeBoletos;
 	}
 
 }

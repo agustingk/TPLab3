@@ -9,9 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class JsonUtiles {
-	public static void grabar(JSONArray array) {
+	public static void grabar(JSONArray array, String fileName) {
 		try {
-			FileWriter file = new FileWriter("test.json");
+			FileWriter file = new FileWriter(fileName + ".json");
 			file.write(array.toString());
 			file.flush();
 			file.close();

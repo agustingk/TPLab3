@@ -4,6 +4,7 @@ import cuenta.Cuenta;
 import cuenta.CuentaAdmin;
 import cuenta.CuentaLight;
 import cuenta.CuentaPro;
+import json.JsonUtiles;
 import tren.Tren;
 import tren.TrenBala;
 
@@ -19,10 +20,14 @@ public class Main {
 		cuenta2.agregarSaldo(890000);
 		cuenta2.agregarSaldo(1000000);
 
-		Cuenta cuenta3 = new CuentaPro("Jose", "Perez", 17, "Jose05", "1234", 'm', "45222154");
+		CuentaPro cuenta3 = new CuentaPro("Jeronimo", "Rodriguez", 17, "JeroKPO", "1234", 'm', "45222154");
 		cuenta3.agregarSaldo(1000);
+		
+		CuentaLight cuenta4 = new CuentaLight("Luis", "Gomez", 33, "Lucho0004", "1234", 'm', "34544677");
+		
 		terminal1.agregarCuenta(cuenta2);
 		terminal1.agregarCuenta(cuenta3);
+		terminal1.agregarCuenta(cuenta4);
 
 		/////////////////////////////////////
 
@@ -31,6 +36,7 @@ public class Main {
 		terminal1.getAdmin().agregarDestino(destino1, terminal1.getListaDeDestinos());
 		terminal1.getAdmin().agregarDestino(destino2, terminal1.getListaDeDestinos());
 
+				
 		/////////////////////////////////////
 
 		terminal1.getAdmin().quitarDestino(0, terminal1.getListaDeDestinos());
@@ -53,15 +59,28 @@ public class Main {
 
 		//////////////////////////////////////
 
-		System.out.println(cuenta2.mostrarListaDeDestinos(terminal1.getListaDeDestinos()));
+		Boleto boleto1 = new Boleto(destino1, tren1, 0, cuenta2, 300);
+		Boleto boleto2 = new Boleto(destino2, tren2, 1, cuenta3, 499);
+		Boleto boleto3 = new Boleto(destino2, tren2, 3, cuenta2, 1000);
+		
+		cuenta2.agregarBoleto(boleto1);
+		cuenta3.agregarBoleto(boleto2);
+		cuenta2.agregarBoleto(boleto3);
+		
+		/////////////////////////////////////		
+		
+		//System.out.println(cuenta2.mostrarListaDeDestinos(terminal1.getListaDeDestinos()));
 
-		System.out.println(cuenta2.mostrarListaDeTrenes(terminal1.getListaDeTrenes()));
+		//System.out.println(cuenta2.mostrarListaDeTrenes(terminal1.getListaDeTrenes()));
 
 		//////////////////////////////////////
 
 		cuentaAdmin.iniciarViaje(0, terminal1.getListaDeTrenes());
-
-		System.out.println(terminal1.getListaDeTrenes());
-
+		
+		cuentaAdmin.exportarFileJsonDeCuentas(terminal1.getMapDeCuentas());
+		cuentaAdmin.exportarFileJsonDeTrenes(terminal1.getListaDeTrenes());
+		
+		//System.out.println(JsonUtiles.leer("jsonCuentas"));
+		
 	}
 }
