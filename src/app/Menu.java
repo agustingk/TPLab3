@@ -1,8 +1,8 @@
 package app;
 
+import java.util.Scanner;
+
 public class Menu {
-	
-	
 	
 	public void visualMenuAdmin()
 	{
@@ -47,6 +47,29 @@ public class Menu {
 		System.out.println("\n3.Modificar un destino");
 		System.out.println("\n4.Eliminar un destino");
 		System.out.println("\n0.Atras");
+	}
+	
+	public void menuMain()
+	{
+		Scanner teclado=new Scanner(System.in);
+		System.out.println("Bienvenido a la terminal de Mar del Plata");
+		int opcion=1;
+		while(opcion!=0)
+		{
+			System.out.println("1.Loguearse");
+			System.out.println("2.Registrarse");
+			System.out.println("0.Salir");
+			teclado.nextInt();
+			switch(opcion) {
+			case 1:
+				//aca usaria las funciones de log in... SI TUVIESE AlGUNA (inserte meme de los padrinos magicos)
+			case 2:
+				//
+			default:
+				break;
+			}
+		}
+		teclado.close();
 	}
 	
 	public void visualMenuUsuario()
