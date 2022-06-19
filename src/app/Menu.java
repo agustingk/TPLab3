@@ -51,21 +51,30 @@ public class Menu {
 	
 	public void menuMain()
 	{
+		Terminal nuevaTerminal;
 		Scanner teclado=new Scanner(System.in);
-		System.out.println("Bienvenido a la terminal de Mar del Plata");
 		int opcion=1;
-		while(opcion!=0)
+		while(opcion!=3)
 		{
+			nuevaTerminal = FileUtiles.leerTerminal();
+			System.out.println("---------- "+ "Bienvenido a " + nuevaTerminal.getNombre() + " ----------");
 			System.out.println("1.Loguearse");
 			System.out.println("2.Registrarse");
-			System.out.println("0.Salir");
-			teclado.nextInt();
+			System.out.println("3.Salir");
+			//teclado.nextInt();
+			opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
 				//aca usaria las funciones de log in... SI TUVIESE AlGUNA (inserte meme de los padrinos magicos)
+				nuevaTerminal.login();
+				break;
 			case 2:
-				//
+				nuevaTerminal.registrarCuenta();
+				break;
+			case 3:
+				break;				
 			default:
+				System.out.println("\nIngrese una opcion correcta!");
 				break;
 			}
 		}

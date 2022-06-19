@@ -27,7 +27,7 @@ public abstract class Cuenta extends Persona implements Serializable{
 		this.saldo = 0;
 		this.listaDeBoletos = new ArrayList<Boleto>();
 	}
-
+		
 	public void agregarBoleto(Boleto boleto) {
 		if(boleto!=null) {
 			this.listaDeBoletos.add(boleto);

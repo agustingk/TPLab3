@@ -85,8 +85,8 @@ public class Main {
 		FileUtiles.grabarTerminal(terminal1);
 		
 		//Terminal terminalDeFile = FileUtiles.leerTerminal();
-		*/
-		Terminal terminalDeFile = new Terminal();
+		
+		/*Terminal terminalDeFile = new Terminal();
 		
 		System.out.println(terminalDeFile + "\n\n" + "----------------------------------------" + "\n\n");
 		
@@ -96,6 +96,10 @@ public class Main {
 		
 		///FileUtiles.grabarTerminal(terminalDeFile);
 		
-		System.out.println(terminalDeFile);
+		System.out.println(terminalDeFile);*/
+		
+		Menu menu = new Menu();
+		menu.menuMain();
+		
 	}
 }
