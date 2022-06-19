@@ -62,10 +62,11 @@ public class Terminal implements Serializable {
 		String user="";
 		String pass = "";
 		Scanner scan = new Scanner(System.in);
-		int opcion=1, opcion2=3;
+		int opcion=1, opcion2;
 		Cuenta cuentaARegistrar;
 		
 		while(opcion!=0) {
+			opcion2=3;
 			System.out.println("-----REGISTRO DE CUENTA----");
 			System.out.println("\n\nIngrese un nombre de usuario a registrar: ");
 			user = scan.next();
