@@ -1,6 +1,7 @@
 package app;
 
 import java.io.Serializable;
+import java.util.Formatter;
 
 import cuenta.Persona;
 import tren.Tren;
@@ -93,9 +94,11 @@ public class Boleto implements Serializable{
 
 	@Override
 	public String toString() {
+		Formatter fmt = new Formatter();
+		fmt.format("%.2f", this.getPrecio());
 		return getClass().getName() + " {\n\tdestinoDelViaje: " + destinoDelViaje + "\n\ttrenSeleccionado: "
 				+ trenSeleccionado + "\n\tindiceTren: " + indiceTren + "\n\tnombre: " + nombre + "\n\tapellido: "
-				+ apellido + "\n\tprecio: " + precio + "\n\tvencido: " + vencido + "\n}";
+				+ apellido + "\n\tprecio: " + fmt + "\n\tvencido: " + vencido + "\n}";
 	}
 
 }
