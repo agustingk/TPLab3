@@ -111,7 +111,7 @@ public class Menu {
 			nuevaTerminal = FileUtiles.leerTerminal();
 			
 			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
-			System.out.println("Hola, "+cuentaIngresada.getNombre()+"!, que deseas hacer?...\n");
+			System.out.println("Hola "+cuentaIngresada.getUser()+"!, que deseas hacer?...\n");
 			System.out.println("1.Comprar un boleto");
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
@@ -155,7 +155,7 @@ public class Menu {
 			nuevaTerminal = FileUtiles.leerTerminal();
 			
 			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
-			System.out.println("Hola, "+cuentaIngresada.getNombre()+"!, que deseas hacer?...\n");
+			System.out.println("Hola "+cuentaIngresada.getUser()+"!, que deseas hacer?...\n");
 			System.out.println("1.Comprar un boleto");
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
