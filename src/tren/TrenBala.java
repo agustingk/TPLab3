@@ -7,8 +7,8 @@ public class TrenBala extends Tren {
 		super();
 	}
 
-	public TrenBala(String modelo, int anioFabricacion, int distanciaMaxima) {
-		super();
+	public TrenBala(String modelo, int anioFabricacion, int distanciaMaxima, int precioPorKilometro) {
+		super(modelo, anioFabricacion, distanciaMaxima, precioPorKilometro);
 	}
 
 }

@@ -2,6 +2,8 @@ package cuenta;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import app.Boleto;
 import app.Destino;
@@ -38,7 +40,19 @@ public abstract class Cuenta extends Persona implements Serializable{
 		return "El saldo de esta cuenta es de "+this.getSaldo()+"." ;
 	}
 	
-	public abstract void agregarSaldo();
+	public void agregarSaldo() {
+		int saldo=0;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Ingrese saldo a depositar: ");
+		try {
+			saldo = scan.nextInt();	
+			this.setSaldo(this.getEdad() + saldo);
+			System.out.println("Saldo depositado correctamente.");
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Ingrese un dato correcto!");
+		}
+	}
 	
 	public abstract double sacarBoleto(ArrayList<Tren> trenes, ArrayList<Destino> destinos);//// este metodo abstracto va a depender de cada subclase.
 

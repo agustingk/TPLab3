@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import cuenta.Cuenta;
 import cuenta.CuentaAdmin;
+import cuenta.CuentaLight;
+import cuenta.CuentaPro;
 import tren.Tren;
 
 public class Menu {
@@ -57,24 +59,37 @@ public class Menu {
 	
 	public void menuMain()
 	{
-		Terminal nuevaTerminal;
+		Terminal nuevaTerminal = new Terminal();
 		Scanner teclado=new Scanner(System.in);
 		int opcion=1;
 		while(opcion!=3)
 		{
 			nuevaTerminal = FileUtiles.leerTerminal();
+			
+			/*
+			Destino destino1 = new Destino("Bariloche", 1443);
+			nuevaTerminal.getListaDeDestinos().add(destino1);
+			Destino destino2 = new Destino("CABA", 413.9);
+			Tren tren1 = new Tren("Alstom 2000", 2006, 800, 3);
+			nuevaTerminal.getListaDeDestinos().add(destino2);
+			nuevaTerminal.getListaDeTrenes().add(tren1);
+			FileUtiles.grabarTerminal(nuevaTerminal);
+			*/
+			
+			nuevaTerminal = FileUtiles.leerTerminal();
 			System.out.println("---------- "+ "Bienvenido a " + nuevaTerminal.getNombre() + " ----------");
 			System.out.println("1.Loguearse");
 			System.out.println("2.Registrarse");
 			System.out.println("3.Salir");
-			//teclado.nextInt();
 			opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
 				nuevaTerminal.login();
+				FileUtiles.grabarTerminal(nuevaTerminal);
 				break;
 			case 2:
 				nuevaTerminal.registrarCuenta();
+				FileUtiles.grabarTerminal(nuevaTerminal);
 				break;
 			case 3:
 				break;				
@@ -86,32 +101,21 @@ public class Menu {
 		teclado.close();
 	}
 	
-	public void visualMenuUsuario(Cuenta cuentaIngresada)
+	public void visualMenuUsuarioLight(CuentaLight cuentaIngresada)
 	{
 		Terminal nuevaTerminal = new Terminal();
 		Scanner teclado=new Scanner(System.in);
 		int opcion=1;
-		while(opcion!=4)
+		while(opcion!=0)
 		{
 			nuevaTerminal = FileUtiles.leerTerminal();
-			
-			////////
-			Destino destino1 = new Destino("Bariloche", 1443);
-			Destino destino2 = new Destino("CABA", 413.9);
-			Tren tren1 = new Tren("Alstom 2000", 2006, 800);
-			nuevaTerminal.getListaDeDestinos().add(destino1);
-			nuevaTerminal.getListaDeDestinos().add(destino2);
-			nuevaTerminal.getListaDeTrenes().add(tren1);
-			FileUtiles.grabarTerminal(nuevaTerminal);
-			////////
 			
 			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
 			System.out.println("Hola, "+cuentaIngresada.getNombre()+"!, que deseas hacer?...\n");
 			System.out.println("1.Comprar un boleto");
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
-			System.out.println("4.Salir");
-			//teclado.nextInt();
+			System.out.println("0.Salir");
 			
 			opcion = teclado.nextInt();
 			switch(opcion) {
@@ -122,20 +126,63 @@ public class Menu {
 				break;
 			case 2:
 				nuevaTerminal = FileUtiles.leerTerminal();
-				if(cuentaIngresada instanceof CuentaAdmin) {
-					nuevaTerminal.getAdmin().agregarSaldo();
-				}
-				else {
-					nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).agregarSaldo();
-					///System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada).getSaldo());
-				}
+				
+				nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).agregarSaldo();
+				
 				FileUtiles.grabarTerminal(nuevaTerminal);
 				break;
 			case 3:
 				nuevaTerminal = FileUtiles.leerTerminal();
 				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());
 				break;				
+			case 0:
+				break;
+			default:
+				System.out.println("\nIngrese una opcion correcta!");
+				break;
+			}
+		}
+		FileUtiles.grabarTerminal(nuevaTerminal);
+	}
+
+	public void visualMenuUsuarioPro(CuentaPro cuentaIngresada)
+	{
+		Terminal nuevaTerminal = new Terminal();
+		Scanner teclado=new Scanner(System.in);
+		int opcion=1;
+		while(opcion!=0)
+		{
+			nuevaTerminal = FileUtiles.leerTerminal();
+			
+			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
+			System.out.println("Hola, "+cuentaIngresada.getNombre()+"!, que deseas hacer?...\n");
+			System.out.println("1.Comprar un boleto");
+			System.out.println("2.Saldo");
+			System.out.println("3.Boletos");
+			System.out.println("4.Kilometros ganados");
+			System.out.println("0.Salir");
+			
+			opcion = teclado.nextInt();
+			switch(opcion) {
+			case 1:
+				nuevaTerminal = FileUtiles.leerTerminal();
+				nuevaTerminal.setRecaudacion(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).sacarBoleto(nuevaTerminal.getListaDeTrenes(), nuevaTerminal.getListaDeDestinos()));
+				FileUtiles.grabarTerminal(nuevaTerminal);
+				break;
+			case 2:
+				nuevaTerminal = FileUtiles.leerTerminal();
+				nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).agregarSaldo();
+				FileUtiles.grabarTerminal(nuevaTerminal);
+				break;
+			case 3:
+				nuevaTerminal = FileUtiles.leerTerminal();
+				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());
+				break;	
 			case 4:
+				nuevaTerminal = FileUtiles.leerTerminal();
+				((CuentaPro) nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser())).canjearKilometrosGanados();
+				FileUtiles.grabarTerminal(nuevaTerminal);
+			case 0:
 				break;
 			default:
 				System.out.println("\nIngrese una opcion correcta!");

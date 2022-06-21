@@ -59,7 +59,12 @@ public class Terminal implements Serializable {
 				///menu.visualMenuAdmin();
 			}
 			else {
-				menu.visualMenuUsuario(cuentaLogeada);
+				if(cuentaLogeada instanceof CuentaLight) {
+					menu.visualMenuUsuarioLight((CuentaLight) cuentaLogeada);					
+				}
+				if(cuentaLogeada instanceof CuentaPro) {
+					menu.visualMenuUsuarioPro((CuentaPro) cuentaLogeada);
+				}
 			}
 		}
 	}

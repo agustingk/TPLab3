@@ -5,6 +5,7 @@ import java.io.Serializable;
 ///Simple clase Tren que tiene un nombre de modelo, a�o de fabricacion, distancia maxima posible y un estado "enViaje" que se modifica por la CuentaAdmin cuando se inicia un viaje con el mismo.
 public class Tren implements Serializable{
 	private String modelo;
+	private int precioPorKilometro;
 	private int anioFabricacion;
 	private double distanciaMaxima;
 	private boolean enViaje;
@@ -13,11 +14,24 @@ public class Tren implements Serializable{
 		///
 	}
 
-	public Tren(String modelo, int anioFabricacion, int distanciaMaxima) {
+	public Tren(String modelo, int anioFabricacion, int distanciaMaxima, int precioPorKilometro){
+		this.precioPorKilometro = precioPorKilometro;
 		this.anioFabricacion = anioFabricacion;
 		this.modelo = modelo;
 		this.distanciaMaxima = distanciaMaxima;
 		this.enViaje = false;
+	}
+
+	public int getPrecioPorKilometro() {
+		return precioPorKilometro;
+	}
+
+	public void setPrecioPorKilometro(int precioPorKilometro) {
+		this.precioPorKilometro = precioPorKilometro;
+	}
+
+	public void setDistanciaMaxima(double distanciaMaxima) {
+		this.distanciaMaxima = distanciaMaxima;
 	}
 
 	@Override

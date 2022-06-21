@@ -43,21 +43,6 @@ public class CuentaAdmin extends Cuenta {
 			}
 		}
 	}
-
-	public void agregarSaldo() {
-		int saldo=0;
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Ingrese cuanto saldo quiere agregar: ");
-		try {
-			saldo = scan.nextInt();	
-			this.setSaldo(this.getSaldo() + saldo);
-			System.out.println("El monto ha sido cargado correctamente!");
-		}		
-		catch(InputMismatchException e){
-			System.out.println("Error al ingresar el monto a ingresar en la cuenta");
-		}
-	}
-	
 	
 	public void quitarDestino(int indiceDestino, ArrayList<Destino> destinos) {//// indiceDeDestino seria la posicion
 																				//// que ocupa el destino que se desea
