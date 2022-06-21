@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +44,21 @@ public class CuentaAdmin extends Cuenta {
 		}
 	}
 
+	public void agregarSaldo() {
+		int saldo=0;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Ingrese cuanto saldo quiere agregar: ");
+		try {
+			saldo = scan.nextInt();	
+			this.setSaldo(saldo);
+			System.out.println("El monto ha sido cargado correctamente!");
+		}		
+		catch(InputMismatchException e){
+			System.out.println("Error al ingresar el monto a ingresar en la cuenta");
+		}
+	}
+	
+	
 	public void quitarDestino(int indiceDestino, ArrayList<Destino> destinos) {//// indiceDeDestino seria la posicion
 																				//// que ocupa el destino que se desea
 																				//// eliminar en la listaDeDestinos de

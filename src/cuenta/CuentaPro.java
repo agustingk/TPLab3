@@ -14,4 +14,10 @@ public class CuentaPro extends Cuenta {
 	public Boleto sacarBoleto() {/// Resta el costo del Boleto al saldo pero recibe un descuento.
 		return null;
 	}
+	
+	@Override
+	public void agregarSaldo() {
+		// TODO Auto-generated method stub
+		
+	}
 }

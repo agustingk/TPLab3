@@ -34,6 +34,8 @@ public abstract class Cuenta extends Persona implements Serializable{
 		}
 	}
 	
+	public abstract void agregarSaldo();
+	
 	public abstract Boleto sacarBoleto();//// este metodo abstracto va a depender de cada subclase.
 
 	public void agregarSaldo(int dinero) {
@@ -56,6 +58,10 @@ public abstract class Cuenta extends Persona implements Serializable{
 
 	public int getSaldo() {
 		return saldo;
+	}
+	
+	public void setSaldo(int saldo) {
+		this.saldo += saldo;
 	}
 
 	public String mostrarListaDeTrenes(ArrayList<Tren> trenes) {

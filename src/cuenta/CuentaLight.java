@@ -19,4 +19,10 @@ public class CuentaLight extends Cuenta {
 		return null;
 	}
 
+	@Override
+	public void agregarSaldo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

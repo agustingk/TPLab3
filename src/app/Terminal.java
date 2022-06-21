@@ -54,7 +54,13 @@ public class Terminal implements Serializable {
 		pass = scan.next();
 		Cuenta cuentaLogeada = this.buscarCuentaEnTerminal(user, pass);
 		if(cuentaLogeada != null) {
-			System.out.println("LOGEASTE LINCE");
+			Menu menu = new Menu();
+			if(cuentaLogeada instanceof CuentaAdmin) {
+				///menu.visualMenuAdmin();
+			}
+			else {
+				menu.visualMenuUsuario(cuentaLogeada);
+			}
 		}
 	}
 
@@ -62,11 +68,8 @@ public class Terminal implements Serializable {
 		String user="";
 		String pass = "";
 		Scanner scan = new Scanner(System.in);
-		int opcion=1, opcion2;
+		int opcion=1, opcion2=0;
 		Cuenta cuentaARegistrar;
-		
-		while(opcion!=0) {
-			opcion2=3;
 			System.out.println("-----REGISTRO DE CUENTA----");
 			System.out.println("\n\nIngrese un nombre de usuario a registrar: ");
 			user = scan.next();
@@ -76,7 +79,7 @@ public class Terminal implements Serializable {
 			else {
 				System.out.println("\nIngrese una contraseña: ");
 				pass = scan.next();
-				while(opcion2 != 1 && opcion2 != 2 ) {
+				while(opcion2 != 1 && opcion2 != 2 && opcion2 != 3) {
 					System.out.println("\nPor favor, elija el tipo de cuenta que desea registrar: ");
 					System.out.println("1.Cuenta Light");
 					System.out.println("2.Cuenta Pro");
@@ -94,20 +97,15 @@ public class Terminal implements Serializable {
 						System.out.println("\nRegistro completado satisfactoriamente.");
 						break;
 					case 3:
+						System.out.println("Registro cancelado. Regresando al menu principal.");
 						break;
 					default:
 						System.out.println("\nIngrese una opcion correcta!");
 					}
 				}
 			}
-			System.out.println("Desea continuar con el registro? Ingrese cualquier tecla para continuar o '0' para salir...");
-			try {
-				opcion = scan.nextInt();
-			}
-			catch(InputMismatchException e) {
-				scan.next();
-			}
-		}
+		
+		
 		FileUtiles.grabarTerminal(this);
 	}
 	

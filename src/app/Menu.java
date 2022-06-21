@@ -2,6 +2,8 @@ package app;
 
 import java.util.Scanner;
 
+import cuenta.Cuenta;
+
 public class Menu {
 	
 	public void visualMenuAdmin()
@@ -65,7 +67,6 @@ public class Menu {
 			opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
-				//aca usaria las funciones de log in... SI TUVIESE AlGUNA (inserte meme de los padrinos magicos)
 				nuevaTerminal.login();
 				break;
 			case 2:
@@ -81,11 +82,38 @@ public class Menu {
 		teclado.close();
 	}
 	
-	public void visualMenuUsuario()
+	public void visualMenuUsuario(Cuenta cuentaIngresada)
 	{
-		System.out.println("1.Comprar un nuevo viaje");
-		System.out.println("\n2.Saldo");
-		System.out.println("\n3.Historial de viajes");
-		System.out.println("\n0.Salir");
+		Terminal nuevaTerminal;
+		Scanner teclado=new Scanner(System.in);
+		int opcion=1;
+		while(opcion!=4)
+		{
+			nuevaTerminal = FileUtiles.leerTerminal();
+			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
+			System.out.println("Hola, "+cuentaIngresada.getNombre()+"!, que deseas hacer?...\n");
+			System.out.println("1.Comprar un boleto");
+			System.out.println("2.Saldo");
+			System.out.println("3.Boletos");
+			System.out.println("4.Salir");
+			//teclado.nextInt();
+			opcion = teclado.nextInt();
+			switch(opcion) {
+			case 1:
+				
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;				
+			case 4:
+				break;
+			default:
+				System.out.println("\nIngrese una opcion correcta!");
+				break;
+			}
+		}
 	}
 }
