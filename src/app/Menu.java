@@ -65,7 +65,7 @@ public class Menu {
 		while(opcion!=3)
 		{
 			nuevaTerminal = FileUtiles.leerTerminal();
-			
+	
 			/*
 			Destino destino1 = new Destino("Bariloche", 1443);
 			nuevaTerminal.getListaDeDestinos().add(destino1);
@@ -85,7 +85,6 @@ public class Menu {
 			switch(opcion) {
 			case 1:
 				nuevaTerminal.login();
-				FileUtiles.grabarTerminal(nuevaTerminal);
 				break;
 			case 2:
 				nuevaTerminal.registrarCuenta();
@@ -115,7 +114,7 @@ public class Menu {
 			System.out.println("1.Comprar un boleto");
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
-			System.out.println("0.Salir");
+			System.out.println("0.Cerrar sesion");
 			
 			opcion = teclado.nextInt();
 			switch(opcion) {
@@ -160,7 +159,7 @@ public class Menu {
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
 			System.out.println("4.Kilometros ganados");
-			System.out.println("0.Salir");
+			System.out.println("0.Cerrar sesion");
 			
 			opcion = teclado.nextInt();
 			switch(opcion) {
