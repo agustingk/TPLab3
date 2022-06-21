@@ -50,7 +50,7 @@ public class CuentaAdmin extends Cuenta {
 		System.out.println("Ingrese cuanto saldo quiere agregar: ");
 		try {
 			saldo = scan.nextInt();	
-			this.setSaldo(saldo);
+			this.setSaldo(this.getSaldo() + saldo);
 			System.out.println("El monto ha sido cargado correctamente!");
 		}		
 		catch(InputMismatchException e){
@@ -148,7 +148,7 @@ public class CuentaAdmin extends Cuenta {
 						boleto.put("destino", boletosArray.get(i).getDestinoDelViaje().getNombreDeDestino());
 						boleto.put("tren", boletosArray.get(i).getTrenSeleccionado().getModelo());
 						boleto.put("indice", boletosArray.get(i).getIndiceTren());
-						boleto.put("dueño", boletosArray.get(i).getPersona().getNombre() + " " + boletosArray.get(i).getPersona().getApellido());
+						boleto.put("dueño", boletosArray.get(i).getNombre() + " " + boletosArray.get(i).getApellido());
 						boleto.put("precio", boletosArray.get(i).getPrecio());
 						boleto.put("vencido", boletosArray.get(i).isVencido());
 						boletos.put(i, boleto);
@@ -195,10 +195,10 @@ public class CuentaAdmin extends Cuenta {
 	}
 
 	@Override
-	public Boleto sacarBoleto() {/// sacar boleto para el admin no deberia restar saldo. Seria sacar un boleto
+	public double sacarBoleto(ArrayList<Tren> trenes, ArrayList<Destino> destinos) {/// sacar boleto para el admin no deberia restar saldo. Seria sacar un boleto
 									/// gratis.
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

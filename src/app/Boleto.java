@@ -13,8 +13,9 @@ public class Boleto implements Serializable{
 	private int indiceTren;//// Es el indice que tiene el tren en la listaDeTrenes de la Terminal. Es para
 							//// diferenciar trenes entre si (ej., un mismo modelo de tren con el mismo
 							//// destino).
-	private Persona persona;/// contiene los datos de BASICOS de un Cliente que compro el boleto.
-	private int precio;/// hay que encontrar la forma de que el precio dependa de la distancia del
+	private String nombre;
+	private String apellido;
+	private double precio;/// hay que encontrar la forma de que el precio dependa de la distancia del
 						/// Destino y el Tren que se elija. De modo que a medida que sea mas lejos o
 						/// mejor sea el tren, mas caro sea el boleto.
 	private boolean vencido;/// siempre sera false hasta que mismo tren con el mismo destino inicie el
@@ -24,11 +25,12 @@ public class Boleto implements Serializable{
 		///
 	}
 
-	public Boleto(Destino destino, Tren tren, int indice, Persona persona, int precio) {
+	public Boleto(Destino destino, Tren tren, int indice, String nombre, String apellido, double precio) {
 		this.destinoDelViaje = destino;
 		this.trenSeleccionado = tren;
 		this.indiceTren = indice;
-		this.persona = persona;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.precio = precio;
 		this.vencido = false;
 	}
@@ -57,20 +59,28 @@ public class Boleto implements Serializable{
 		this.indiceTren = indiceTren;
 	}
 
-	public Persona getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-	public int getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public boolean isVencido() {
@@ -83,11 +93,9 @@ public class Boleto implements Serializable{
 
 	@Override
 	public String toString() {
-		return " {\n\tdestinoDelViaje: " + destinoDelViaje + "\n\ttrenSeleccionado: "
-				+ trenSeleccionado + "\n\tindiceTren: " + indiceTren + "\n\tpersona: " + this.persona.getNombre()+ " " + this.persona.getApellido() + "\n\tprecio: "
-				+ precio + "\n\tvencido: " + vencido + "\n}";
+		return getClass().getName() + " {\n\tdestinoDelViaje: " + destinoDelViaje + "\n\ttrenSeleccionado: "
+				+ trenSeleccionado + "\n\tindiceTren: " + indiceTren + "\n\tnombre: " + nombre + "\n\tapellido: "
+				+ apellido + "\n\tprecio: " + precio + "\n\tvencido: " + vencido + "\n}";
 	}
-
-
 
 }

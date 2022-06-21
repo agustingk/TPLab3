@@ -12,7 +12,7 @@ import tren.Tren;
 public abstract class Cuenta extends Persona implements Serializable{
 	private String user;
 	private String pass;
-	private int saldo;/// saldo que es 0 al crear la cuenta peeeeero se puede ingresar dinero al mismo
+	private double saldo;/// saldo que es 0 al crear la cuenta peeeeero se puede ingresar dinero al mismo
 						/// para luego ser gastado en Boletos.
 	private ArrayList<Boleto> listaDeBoletos;
 
@@ -34,9 +34,13 @@ public abstract class Cuenta extends Persona implements Serializable{
 		}
 	}
 	
+	public String mostrarSaldo() {
+		return "El saldo de esta cuenta es de "+this.getSaldo()+"." ;
+	}
+	
 	public abstract void agregarSaldo();
 	
-	public abstract Boleto sacarBoleto();//// este metodo abstracto va a depender de cada subclase.
+	public abstract double sacarBoleto(ArrayList<Tren> trenes, ArrayList<Destino> destinos);//// este metodo abstracto va a depender de cada subclase.
 
 	public void agregarSaldo(int dinero) {
 		this.saldo += dinero;
@@ -56,11 +60,11 @@ public abstract class Cuenta extends Persona implements Serializable{
 		return pass;
 	}
 
-	public int getSaldo() {
+	public double getSaldo() {
 		return saldo;
 	}
 	
-	public void setSaldo(int saldo) {
+	public void setSaldo(double saldo) {
 		this.saldo += saldo;
 	}
 
@@ -79,5 +83,6 @@ public abstract class Cuenta extends Persona implements Serializable{
 	public ArrayList<Boleto> getListaDeBoletos() {
 		return this.listaDeBoletos;
 	}
+
 
 }

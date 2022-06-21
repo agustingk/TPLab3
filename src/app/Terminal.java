@@ -197,7 +197,7 @@ public class Terminal implements Serializable {
 		return recaudacion;
 	}
 
-	public void setRecaudacion(int recaudacion) {
+	public void setRecaudacion(double recaudacion) {
 		this.recaudacion = recaudacion;
 	}
 

@@ -3,6 +3,8 @@ package app;
 import java.util.Scanner;
 
 import cuenta.Cuenta;
+import cuenta.CuentaAdmin;
+import tren.Tren;
 
 public class Menu {
 	
@@ -12,6 +14,8 @@ public class Menu {
 		System.out.println("\n2.Administrar trenes");
 		System.out.println("\n3.Administrar cuentas");
 		System.out.println("\n4.Administrar destinos");
+		///inicar viaje
+		///terminar viaje
 		System.out.println("\n0.Salir");
 	}
 	
@@ -84,12 +88,23 @@ public class Menu {
 	
 	public void visualMenuUsuario(Cuenta cuentaIngresada)
 	{
-		Terminal nuevaTerminal;
+		Terminal nuevaTerminal = new Terminal();
 		Scanner teclado=new Scanner(System.in);
 		int opcion=1;
 		while(opcion!=4)
 		{
 			nuevaTerminal = FileUtiles.leerTerminal();
+			
+			////////
+			Destino destino1 = new Destino("Bariloche", 1443);
+			Destino destino2 = new Destino("CABA", 413.9);
+			Tren tren1 = new Tren("Alstom 2000", 2006, 800);
+			nuevaTerminal.getListaDeDestinos().add(destino1);
+			nuevaTerminal.getListaDeDestinos().add(destino2);
+			nuevaTerminal.getListaDeTrenes().add(tren1);
+			FileUtiles.grabarTerminal(nuevaTerminal);
+			////////
+			
 			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
 			System.out.println("Hola, "+cuentaIngresada.getNombre()+"!, que deseas hacer?...\n");
 			System.out.println("1.Comprar un boleto");
@@ -97,16 +112,28 @@ public class Menu {
 			System.out.println("3.Boletos");
 			System.out.println("4.Salir");
 			//teclado.nextInt();
+			
 			opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
-				
+				nuevaTerminal = FileUtiles.leerTerminal();
+				nuevaTerminal.setRecaudacion(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).sacarBoleto(nuevaTerminal.getListaDeTrenes(), nuevaTerminal.getListaDeDestinos()));
+				FileUtiles.grabarTerminal(nuevaTerminal);
 				break;
 			case 2:
-				
+				nuevaTerminal = FileUtiles.leerTerminal();
+				if(cuentaIngresada instanceof CuentaAdmin) {
+					nuevaTerminal.getAdmin().agregarSaldo();
+				}
+				else {
+					nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).agregarSaldo();
+					///System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada).getSaldo());
+				}
+				FileUtiles.grabarTerminal(nuevaTerminal);
 				break;
 			case 3:
-				
+				nuevaTerminal = FileUtiles.leerTerminal();
+				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());
 				break;				
 			case 4:
 				break;
@@ -115,5 +142,6 @@ public class Menu {
 				break;
 			}
 		}
+		FileUtiles.grabarTerminal(nuevaTerminal);
 	}
 }

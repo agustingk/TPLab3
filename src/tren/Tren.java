@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Tren implements Serializable{
 	private String modelo;
 	private int anioFabricacion;
-	private int distanciaMaxima;
+	private double distanciaMaxima;
 	private boolean enViaje;
 
 	public Tren() {
@@ -46,7 +46,7 @@ public class Tren implements Serializable{
 		this.anioFabricacion = anioFabricacion;
 	}
 
-	public int getDistanciaMaxima() {
+	public double getDistanciaMaxima() {
 		return distanciaMaxima;
 	}
 
@@ -56,6 +56,18 @@ public class Tren implements Serializable{
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Tren nuevoTren = (Tren)obj;
+		if(nuevoTren.getModelo().equals(this.getModelo())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+			
 	}
 	
 }
