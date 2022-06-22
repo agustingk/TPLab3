@@ -32,9 +32,9 @@ public class Menu {
 			case 1:
 				while(subOpcion!=0)
 				{
-					System.out.println("1.Mostrar todas las terminales por pantalla");
+					System.out.println("1.Mostrar la terminal por pantalla");
 					//System.out.println("\n2.Agregar una nueva terminal");
-					System.out.println("\n2.Editar una terminal");
+					System.out.println("\n2.Editar la terminal");
 					//System.out.println("\n3.Eliminar una terminal");
 					System.out.println("\n0.Atras");
 					subOpcion=teclado.nextInt();
@@ -71,10 +71,45 @@ public class Menu {
 					System.out.println("\n4.Dar de baja un tren");
 					System.out.println("\n0.Atras");
 					subOpcion=teclado.nextInt();
+					int indice=0;
 					switch(subOpcion)
 					{
 					case 1:
 						System.out.println(nuevaTerminal.getListaDeTrenes());
+						break;
+					case 2:
+						Tren nuevo=new Tren();
+						teclado.nextLine();
+						System.out.println("Ingrese el nombre del modelo: ");
+						nuevo.setModelo(teclado.nextLine());
+						System.out.println("Ingrese el año de fabricacion: ");
+						nuevo.setAnioFabricacion(teclado.nextInt());
+						System.out.println("Ingrese la distancia maxima que recorre este modelo: ");
+						nuevo.setDistanciaMaxima(teclado.nextDouble());
+						System.out.println("Ingrese precio por kilometro: ");
+						nuevo.setPrecioPorKilometro(teclado.nextInt());
+						nuevaTerminal.getListaDeTrenes().add(nuevo);
+						FileUtiles.grabarTerminal(nuevaTerminal);
+						break;
+					case 3:
+						System.out.println("Ingrese el indice del tren que quiere modificar: ");
+						indice=teclado.nextInt();
+						teclado.nextLine();
+						System.out.println("Ingrese el nuevo modelo del tren: ");
+						nuevaTerminal.getListaDeTrenes().get(indice).setModelo(teclado.nextLine());
+						System.out.println("Ingrese el año de fabricacion: ");
+						nuevaTerminal.getListaDeTrenes().get(indice).setAnioFabricacion(teclado.nextInt());
+						System.out.println("Ingrese la distancia maxima: ");
+						nuevaTerminal.getListaDeTrenes().get(indice).setDistanciaMaxima(teclado.nextDouble());
+						System.out.println("Ingrese el precio por kilometro: ");
+						nuevaTerminal.getListaDeTrenes().get(indice).setPrecioPorKilometro(teclado.nextInt());
+						FileUtiles.grabarTerminal(nuevaTerminal);
+						break;
+					case 4:
+						System.out.println("Ingrese el indice del tren que quiere modificar: ");
+						indice=teclado.nextInt();
+						nuevaTerminal.getListaDeTrenes().remove(indice);
+						FileUtiles.grabarTerminal(nuevaTerminal);
 						break;
 					case 0:
 						return;
@@ -147,15 +182,15 @@ public class Menu {
 		{
 			nuevaTerminal = FileUtiles.leerTerminal();
 	
-			/*
-			Destino destino1 = new Destino("Bariloche", 1443);
+			
+			/*Destino destino1 = new Destino("Bariloche", 1443);
 			nuevaTerminal.getListaDeDestinos().add(destino1);
 			Destino destino2 = new Destino("CABA", 413.9);
 			Tren tren1 = new Tren("Alstom 2000", 2006, 800, 3);
 			nuevaTerminal.getListaDeDestinos().add(destino2);
 			nuevaTerminal.getListaDeTrenes().add(tren1);
-			FileUtiles.grabarTerminal(nuevaTerminal);
-			*/
+			FileUtiles.grabarTerminal(nuevaTerminal);*/
+			
 			
 			nuevaTerminal = FileUtiles.leerTerminal();
 			System.out.println("---------- "+ "Bienvenido a " + nuevaTerminal.getNombre() + " ----------");
