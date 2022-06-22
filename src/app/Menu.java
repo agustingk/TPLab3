@@ -297,6 +297,7 @@ public class Menu {
 				nuevaTerminal = FileUtiles.leerTerminal();
 				((CuentaPro) nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser())).canjearKilometrosGanados();
 				FileUtiles.grabarTerminal(nuevaTerminal);
+				break;
 			case 0:
 				return;
 			default:
