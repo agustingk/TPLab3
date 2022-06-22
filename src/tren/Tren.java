@@ -14,7 +14,7 @@ public class Tren implements Serializable{
 		///
 	}
 
-	public Tren(String modelo, int anioFabricacion, int distanciaMaxima, int precioPorKilometro){
+	public Tren(String modelo, int anioFabricacion, double distanciaMaxima, int precioPorKilometro){
 		this.precioPorKilometro = precioPorKilometro;
 		this.anioFabricacion = anioFabricacion;
 		this.modelo = modelo;

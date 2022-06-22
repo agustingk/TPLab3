@@ -50,13 +50,13 @@ public class Terminal implements Serializable {
 		
 		System.out.println("Ingrese nombre de usuario: ");
 		user = scan.next();
-		System.out.println("\nIngrese contraseña: ");
+		System.out.println("\nIngrese contraseï¿½a: ");
 		pass = scan.next();
 		Cuenta cuentaLogeada = this.buscarCuentaEnTerminal(user, pass);
 		if(cuentaLogeada != null) {
 			Menu menu = new Menu();
 			if(cuentaLogeada instanceof CuentaAdmin) {
-				///menu.visualMenuAdmin();
+				menu.visualMenuAdmin();
 			}
 			else {
 				if(cuentaLogeada instanceof CuentaLight) {
@@ -82,7 +82,7 @@ public class Terminal implements Serializable {
 				System.out.println("Este nombre de usuario ya se encuentra registrado en la base de datos. Intente con otro usuario.");
 			}
 			else {
-				System.out.println("\nIngrese una contraseña: ");
+				System.out.println("\nIngrese una contraseï¿½a: ");
 				pass = scan.next();
 				while(opcion2 != 1 && opcion2 != 2 && opcion2 != 3) {
 					System.out.println("\nPor favor, elija el tipo de cuenta que desea registrar: ");
