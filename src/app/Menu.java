@@ -713,7 +713,13 @@ public class Menu {
 				break;
 			case 3:
 				nuevaTerminal = FileUtiles.leerTerminal();
-				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());
+				if(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos().size() > 0) {
+					System.out.println("---------- "+ "Menu Boletos de Cuenta" + " ----------");
+					System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());					
+				}
+				else {
+					System.out.println("No tiene boletos comprados por el momento.");
+				}
 				break;				
 			case 0:
 				return;
@@ -776,8 +782,13 @@ public class Menu {
 				break;
 			case 3:
 				nuevaTerminal = FileUtiles.leerTerminal();
-				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());
-				break;	
+				if(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos().size() > 0) {
+					System.out.println("---------- "+ "Menu Boletos de Cuenta" + " ----------");
+					System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());					
+				}
+				else {
+					System.out.println("No tiene boletos comprados por el momento.");
+				}	
 			case 4:
 				nuevaTerminal = FileUtiles.leerTerminal();
 				System.out.println("---------- "+ "Menu Kilometros Ganados" + " ----------");
