@@ -22,6 +22,18 @@ public class Destino implements Serializable{
 				+ distanciaEnKilometros + "\n}";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Destino nuevoDestino = (Destino)obj;
+		if(this.getNombreDeDestino().equals(nuevoDestino.getNombreDeDestino())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
 	public String getNombreDeDestino() {
 		return nombreDeDestino;
 	}

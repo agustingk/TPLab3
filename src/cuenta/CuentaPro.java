@@ -5,6 +5,10 @@ import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import app.Boleto;
 import app.Destino;
 import tren.Tren;
@@ -69,7 +73,7 @@ public class CuentaPro extends Cuenta {
 		int indiceTren, indiceDestino, indiceTrenOriginal=0;
 		Destino destinoElegido = new Destino();
 		Tren trenElegido = new Tren();
-		double precio=0;
+		double precio=0, nuevoSaldo=0;
 		ArrayList<Tren> trenesDisp = new ArrayList<Tren>();
 		
 		if(destinos.size() > 0) {
@@ -138,4 +142,40 @@ public class CuentaPro extends Cuenta {
 	
 		return precio;
 	}
+	
+	@Override
+	public JSONObject toJson() {
+		JSONObject nuevaCuenta = new JSONObject();
+		try {
+			nuevaCuenta.put("user", this.getUser());
+			nuevaCuenta.put("pass", this.getPass());
+			nuevaCuenta.put("saldo", this.getSaldo());
+			nuevaCuenta.put("kilometrosGanados", this.getKilometrosGanados());
+			
+			JSONArray boletos = new JSONArray();
+			ArrayList<Boleto> boletosArray = this.getListaDeBoletos();
+			for(int i=0; i < boletosArray.size();i++) {
+				JSONObject boleto = new JSONObject();
+				boleto.put("destino", boletosArray.get(i).getDestinoDelViaje().getNombreDeDestino());
+				boleto.put("tren", boletosArray.get(i).getTrenSeleccionado().getModelo());
+				boleto.put("indice", boletosArray.get(i).getIndiceTren());
+				boleto.put("dueño", boletosArray.get(i).getNombre() + " " + boletosArray.get(i).getApellido());
+				boleto.put("precio", boletosArray.get(i).getPrecio());
+				boleto.put("vencido", boletosArray.get(i).isVencido());
+				boletos.put(i, boleto);
+			}
+			
+			try{
+				nuevaCuenta.put("boletos", boletos);
+			}
+			catch(JSONException e) {
+				System.out.println("Se rompio todo");
+			}
+			
+		} catch (JSONException e) {	
+			e.printStackTrace();
+		}
+		return nuevaCuenta;
+	}
+	
 }

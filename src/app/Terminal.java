@@ -85,7 +85,7 @@ public class Terminal implements Serializable {
 				System.out.println("\nIngrese una contrase�a: ");
 				pass = scan.next();
 				while(opcion2 != 1 && opcion2 != 2 && opcion2 != 3) {
-					System.out.println("\nPor favor, elija el tipo de cuenta que desea registrar: ");
+					System.out.println("\nPor favor, eliga el tipo de cuenta que desea registrar: ");
 					System.out.println("1.Cuenta Light");
 					System.out.println("2.Cuenta Pro");
 					System.out.println("3.Salir");

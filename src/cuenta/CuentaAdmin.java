@@ -116,47 +116,17 @@ public class CuentaAdmin extends Cuenta {
 	public void exportarFileJsonDeCuentas(HashMap<String, Cuenta> cuentas) {/// genera un archivo json con los datos de las cuentas.
 		if(cuentas!=null) {
 			int cont=0;
-			
 			JSONArray jsonArray = new JSONArray();
-			
 			for(HashMap.Entry<String, Cuenta> entry : cuentas.entrySet()) {
 				try {
-					JSONObject cuenta = new JSONObject();
-					cuenta.put("user", entry.getKey());
-					cuenta.put("pass", entry.getValue().getPass());
-					cuenta.put("saldo", entry.getValue().getSaldo());
-					
-					JSONArray boletos = new JSONArray();
-					ArrayList<Boleto> boletosArray = entry.getValue().getListaDeBoletos();
-					for(int i=0; i < boletosArray.size();i++) {
-						JSONObject boleto = new JSONObject();
-						boleto.put("destino", boletosArray.get(i).getDestinoDelViaje().getNombreDeDestino());
-						boleto.put("tren", boletosArray.get(i).getTrenSeleccionado().getModelo());
-						boleto.put("indice", boletosArray.get(i).getIndiceTren());
-						boleto.put("dueño", boletosArray.get(i).getNombre() + " " + boletosArray.get(i).getApellido());
-						boleto.put("precio", boletosArray.get(i).getPrecio());
-						boleto.put("vencido", boletosArray.get(i).isVencido());
-						boletos.put(i, boleto);
-					}
-					
-					try{
-						cuenta.put("boletos", boletos);
-					}
-					catch(JSONException e) {
-						System.out.println("Se rompio todo");
-					}
-					
+					JSONObject cuenta = entry.getValue().toJson();
 					jsonArray.put(cont, cuenta);
 					cont++;
-					
 				} catch (JSONException e) {
 					e.printStackTrace();
-				}
-				
-				JsonUtiles.grabar(jsonArray, "jsonCuentas");
-				
+				}	
+				JsonUtiles.grabar(jsonArray, "jsonCuentas");			
 			}
-			
 		}
 	}
 
@@ -164,12 +134,8 @@ public class CuentaAdmin extends Cuenta {
 		if(trenes!=null) {
 			JSONArray jsonArray = new JSONArray();
 			for(int i=0; i < trenes.size();i++) {
-				JSONObject tren = new JSONObject();
 				try {
-					tren.put("modelo", trenes.get(i).getModelo());
-					tren.put("anioDeFabricacion", trenes.get(i).getAnioFabricacion());
-					tren.put("distanciaMaxima", trenes.get(i).getDistanciaMaxima());
-					tren.put("enViaje", trenes.get(i).getEnViaje());
+					JSONObject tren = trenes.get(i).toJson();
 					jsonArray.put(i, tren);
 				} catch (JSONException e) {
 					e.printStackTrace();

@@ -2,8 +2,13 @@ package tren;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Inter.Jsoneable;
+
 ///Simple clase Tren que tiene un nombre de modelo, a�o de fabricacion, distancia maxima posible y un estado "enViaje" que se modifica por la CuentaAdmin cuando se inicia un viaje con el mismo.
-public class Tren implements Serializable{
+public class Tren implements Serializable, Jsoneable{
 	private String modelo;
 	private int precioPorKilometro;
 	private int anioFabricacion;
@@ -33,11 +38,12 @@ public class Tren implements Serializable{
 	public void setDistanciaMaxima(double distanciaMaxima) {
 		this.distanciaMaxima = distanciaMaxima;
 	}
-
+	
 	@Override
 	public String toString() {
-		return " \n\tmodelo: " + modelo + "\n\tanioFabricacion: " + anioFabricacion + "\n\tenViaje: " + enViaje
-				+ "\n\tdistanciaMaxima: " + distanciaMaxima + "\n";
+		return getClass().getName() + " {\n\tmodelo: " + modelo + "\n\tprecioPorKilometro: " + precioPorKilometro
+				+ "\n\tanioFabricacion: " + anioFabricacion + "\n\tdistanciaMaxima: " + distanciaMaxima
+				+ "\n\tenViaje: " + enViaje + "\n}";
 	}
 
 	public void setEnViaje(boolean enViaje) {
@@ -75,13 +81,27 @@ public class Tren implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Tren nuevoTren = (Tren)obj;
-		if(nuevoTren.getModelo().equals(this.getModelo())) {
+		if(nuevoTren.getModelo().equals(this.getModelo()) && nuevoTren.getAnioFabricacion() == this.getAnioFabricacion()) {
 			return true;
 		}
 		else {
 			return false;
 		}
 			
+	}
+
+	@Override
+	public JSONObject toJson() {
+		JSONObject nuevoTren = new JSONObject();
+		try {
+			nuevoTren.put("modelo", this.modelo);
+			nuevoTren.put("anioDeFabricacion", this.anioFabricacion);
+			nuevoTren.put("distanciaMaxima", this.distanciaMaxima);
+			nuevoTren.put("enViaje", this.enViaje);
+		} catch (JSONException e) {	
+			e.printStackTrace();
+		}
+		return nuevoTren;
 	}
 	
 }

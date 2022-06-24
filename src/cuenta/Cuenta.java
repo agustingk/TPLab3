@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Inter.Jsoneable;
 import app.Boleto;
 import app.Destino;
 import tren.Tren;
 
 ////Vendria a ser el "pasajero" que compra boletos online a los destinos disponibles.
 ///No se usa esta clase en si sino sus clases hijas "ClaseLight", "ClasePro" y UN "ClaseAdmin".
-public abstract class Cuenta extends Persona implements Serializable{
+public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 	private String user;
 	private String pass;
 	private double saldo;/// saldo que es 0 al crear la cuenta peeeeero se puede ingresar dinero al mismo
@@ -79,7 +84,7 @@ public abstract class Cuenta extends Persona implements Serializable{
 	}
 	
 	public void setSaldo(double saldo) {
-		this.saldo += saldo;
+		this.saldo = saldo;
 	}
 
 	public String mostrarListaDeTrenes(ArrayList<Tren> trenes) {
@@ -98,5 +103,37 @@ public abstract class Cuenta extends Persona implements Serializable{
 		return this.listaDeBoletos;
 	}
 
-
+	@Override
+	public JSONObject toJson() {
+		JSONObject nuevaCuenta = new JSONObject();
+		try {
+			nuevaCuenta.put("user", this.getUser());
+			nuevaCuenta.put("pass", this.getPass());
+			nuevaCuenta.put("saldo", this.getSaldo());
+			
+			JSONArray boletos = new JSONArray();
+			ArrayList<Boleto> boletosArray = this.getListaDeBoletos();
+			for(int i=0; i < boletosArray.size();i++) {
+				JSONObject boleto = new JSONObject();
+				boleto.put("destino", boletosArray.get(i).getDestinoDelViaje().getNombreDeDestino());
+				boleto.put("tren", boletosArray.get(i).getTrenSeleccionado().getModelo());
+				boleto.put("indice", boletosArray.get(i).getIndiceTren());
+				boleto.put("dueño", boletosArray.get(i).getNombre() + " " + boletosArray.get(i).getApellido());
+				boleto.put("precio", boletosArray.get(i).getPrecio());
+				boleto.put("vencido", boletosArray.get(i).isVencido());
+				boletos.put(i, boleto);
+			}
+			
+			try{
+				nuevaCuenta.put("boletos", boletos);
+			}
+			catch(JSONException e) {
+				System.out.println("Se rompio todo");
+			}
+			
+		} catch (JSONException e) {	
+			e.printStackTrace();
+		}
+		return nuevaCuenta;
+	}
 }
