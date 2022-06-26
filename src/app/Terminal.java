@@ -10,6 +10,7 @@ import cuenta.Cuenta;
 import cuenta.CuentaAdmin;
 import cuenta.CuentaLight;
 import cuenta.CuentaPro;
+import exception.TerminalException;
 import tren.Tren;
 
 ///Terminal:
@@ -42,7 +43,7 @@ public class Terminal implements Serializable {
 		this.mapDeCuentas = new HashMap<String, Cuenta>();
 	}
 	
-	public void login() {
+	public void login() throws TerminalException {
 		Scanner scan = new Scanner(System.in);
 		String user="";
 		String pass="";
@@ -76,7 +77,7 @@ public class Terminal implements Serializable {
 		int opcion=1, opcion2=0;
 		Cuenta cuentaARegistrar;
 			System.out.println("-----REGISTRO DE CUENTA----");
-			System.out.println("\n\nIngrese un nombre de usuario a registrar: ");
+			System.out.println("\nIngrese un nombre de usuario a registrar: ");
 			user = scan.next();
 			if(this.buscarCuentaDisponibleEnTerminal(user) == true) {
 				System.out.println("Este nombre de usuario ya se encuentra registrado en la base de datos. Intente con otro usuario.");
@@ -85,7 +86,7 @@ public class Terminal implements Serializable {
 				System.out.println("\nIngrese una contrase�a: ");
 				pass = scan.next();
 				while(opcion2 != 1 && opcion2 != 2 && opcion2 != 3) {
-					System.out.println("\nPor favor, eliga el tipo de cuenta que desea registrar: ");
+					System.out.println("\nPor favor, elija el tipo de cuenta que desea registrar: ");
 					System.out.println("1.Cuenta Light");
 					System.out.println("2.Cuenta Pro");
 					System.out.println("3.Salir");

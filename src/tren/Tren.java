@@ -39,12 +39,25 @@ public class Tren implements Serializable, Jsoneable{
 		this.distanciaMaxima = distanciaMaxima;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return getClass().getName() + " {\n\tmodelo: " + modelo + "\n\tprecioPorKilometro: " + precioPorKilometro
 				+ "\n\tanioFabricacion: " + anioFabricacion + "\n\tdistanciaMaxima: " + distanciaMaxima
 				+ "\n\tenViaje: " + enViaje + "\n}";
+	}*/
+	
+	@Override
+	public String toString() {
+		String viaje = "";
+		if(this.getEnViaje()) {
+			viaje = "En viaje";
+		}
+		else {
+			viaje = "En terminal";
+		}
+		return "Modelo del Tren: "+this.getModelo()+"\nPrecio por Kilometro: "+this.getPrecioPorKilometro()+"\nAño de Fabricacion: "+this.getAnioFabricacion()+"\nDistancia Maxima: "+this.getDistanciaMaxima()+"\nEstado del Tren: "+viaje;
 	}
+	
 
 	public void setEnViaje(boolean enViaje) {
 		this.enViaje = enViaje;

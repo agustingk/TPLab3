@@ -16,11 +16,17 @@ public class Destino implements Serializable{
 		this.nombreDeDestino = nombre;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return getClass().getName() + " {\n\tnombreDeDestino: " + nombreDeDestino + "\n\tdistanciaEnKilometros: "
 				+ distanciaEnKilometros + "\n}";
+	}*/
+	
+	@Override
+	public String toString() {
+		return "Nombre del Destino: "+this.getNombreDeDestino()+"\nDistancia en Kilometros desde Mar del Plata: "+this.getDistanciaEnKilometros();
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

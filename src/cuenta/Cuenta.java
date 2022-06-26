@@ -57,6 +57,7 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		catch(InputMismatchException e) {
 			System.out.println("Ingrese un dato correcto!");
 		}
+		scan.close();
 	}
 	
 	public abstract double sacarBoleto(ArrayList<Tren> trenes, ArrayList<Destino> destinos);//// este metodo abstracto va a depender de cada subclase.
@@ -65,10 +66,22 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		this.saldo += dinero;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return getClass().getName() + " {\n\tuser: " + user + "\n\tpass: " + pass + "\n\tsaldo: " + saldo
 				+ "\n\tlistaDeBoletos: " + this.mostrarListaDeBoletos() + "\n}";
+	}*/
+	
+	@Override
+	public String toString() {
+		String genero = "";
+		if(this.getGenero() == 'm') {
+			genero = "Masculino";
+		}
+		else {
+			genero = "Femenino";
+		}
+		return "Cuenta: \n"+"Nombre: "+this.getNombre()+"\nApellido: "+this.getApellido()+"\nGenero: "+genero+"\nDNI: "+this.getDni()+"\nEdad: "+this.getEdad();
 	}
 
 	public String getUser() {
@@ -96,7 +109,19 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 	}
 	
 	public String mostrarListaDeBoletos() {
-		return this.listaDeBoletos.toString();
+		String boletos = "\n";
+		
+		if(this.getListaDeBoletos().size() > 0) {
+			for(int i = 0; i < this.getListaDeBoletos().size(); i++) {
+				boletos = boletos + this.getListaDeBoletos().get(i)+ "\n\n";
+			}
+		}
+		else {
+			boletos = "No tiene boletos actualmente.";
+		}
+		
+		
+		return boletos;
 	}
 	
 	public ArrayList<Boleto> getListaDeBoletos() {
@@ -135,5 +160,33 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 			e.printStackTrace();
 		}
 		return nuevaCuenta;
+	}
+	
+	public void cambiarDatosDeUsuario() {
+		Scanner scan = new Scanner(System.in);
+		String nombre, apellido, dni;
+		char genero;
+		int edad;
+		try{
+			System.out.println("Ingrese nombre: ");
+			nombre = (scan.nextLine());
+			System.out.println("Ingrese apellido: ");
+			apellido = scan.nextLine();
+			System.out.println("Ingrese DNI: ");
+			dni = scan.nextLine();
+			System.out.println("Ingrese genero (m o f): ");
+			genero = scan.next().charAt(0);
+			System.out.println("Ingrese edad: ");
+			edad = scan.nextInt();
+			this.setApellido(apellido);
+			this.setDni(dni);
+			this.setEdad(edad);
+			this.setGenero(genero);
+			this.setNombre(nombre);
+			System.out.println("\n\nDatos actualizados correctamente.");
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Error al ingresar datos. Accion cancelada.");
+		}
 	}
 }

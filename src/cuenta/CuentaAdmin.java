@@ -18,6 +18,7 @@ import json.JsonUtiles;
 
 import app.Boleto;
 import app.Destino;
+import exception.TerminalException;
 import tren.Tren;
 
 ////Cuenta con metodos extra.
@@ -113,8 +114,8 @@ public class CuentaAdmin extends Cuenta {
 		}
 	}
 
-	public void exportarFileJsonDeCuentas(HashMap<String, Cuenta> cuentas) {/// genera un archivo json con los datos de las cuentas.
-		if(cuentas!=null) {
+	public void exportarFileJsonDeCuentas(HashMap<String, Cuenta> cuentas) throws TerminalException {/// genera un archivo json con los datos de las cuentas.
+		if(cuentas!=null && cuentas.size() > 0) {
 			int cont=0;
 			JSONArray jsonArray = new JSONArray();
 			for(HashMap.Entry<String, Cuenta> entry : cuentas.entrySet()) {
@@ -128,10 +129,13 @@ public class CuentaAdmin extends Cuenta {
 				JsonUtiles.grabar(jsonArray, "jsonCuentas");			
 			}
 		}
+		else {
+			throw new TerminalException();
+		}
 	}
 
-	public void exportarFileJsonDeTrenes(ArrayList<Tren> trenes) {/// genera un archivo json con los datos de los trenes.
-		if(trenes!=null) {
+	public void exportarFileJsonDeTrenes(ArrayList<Tren> trenes) throws TerminalException {/// genera un archivo json con los datos de los trenes.
+		if(trenes!=null && trenes.size() > 0) {
 			JSONArray jsonArray = new JSONArray();
 			for(int i=0; i < trenes.size();i++) {
 				try {
@@ -142,6 +146,9 @@ public class CuentaAdmin extends Cuenta {
 				}
 			}
 			JsonUtiles.grabar(jsonArray, "jsonTrenes");
+		}
+		else {
+			throw new TerminalException();
 		}
 	}
 

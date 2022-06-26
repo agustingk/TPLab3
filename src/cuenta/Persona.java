@@ -10,7 +10,7 @@ public abstract class Persona implements Serializable{
 	private char genero;/// m o f
 
 	public Persona() {
-
+		///
 	}
 
 	public Persona(String nombre, String apellido, int edad, char genero, String dni) {

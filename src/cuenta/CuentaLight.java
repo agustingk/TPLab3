@@ -29,17 +29,21 @@ public class CuentaLight extends Cuenta {
 		ArrayList<Tren> trenesDisp = new ArrayList<Tren>();
 		
 		if(destinos.size() > 0) {
-			System.out.println("Seleccione destino: ");
-			System.out.println(destinos);
+			System.out.println("Seleccione el [INDICE] del destino: ");
+			
+			for(int i = 0; i < destinos.size(); i++) {
+				System.out.println("["+i+"]" + "\n" + destinos.get(i));
+			}
 			
 			try {
 				indiceDestino = scan.nextInt();
 				if(indiceDestino > destinos.size() - 1) {
-					System.out.println("Error al elegir el destino. Accion cancelada.");
+					System.out.println("Error al elegir el destino. Asegurese de seleccionar el [INDICE] correcto.");
 				}
 				else {
 					destinoElegido = destinos.get(indiceDestino);
-					System.out.println("Trenes disponibles: ");
+					System.out.println("\n");
+					System.out.println("Seleccione el [INDICE] de la lista de trenes disponibles para "+destinoElegido.getNombreDeDestino()+": ");
 					for(int i = 0; i < trenes.size(); i++) {
 						if(trenes.get(i).getDistanciaMaxima() >= destinoElegido.getDistanciaEnKilometros()) {
 							if(!trenes.get(i).getEnViaje()) {
@@ -51,7 +55,10 @@ public class CuentaLight extends Cuenta {
 						System.out.println("No hay trenes disponibles por el momento.");
 					}
 					else {
-						System.out.println(trenesDisp);
+						for(int i = 0; i < trenesDisp.size(); i++) {
+							System.out.println("["+i+"]" + "\n" + trenesDisp.get(i));
+						}
+						
 						indiceTren = scan.nextInt();
 						if(indiceTren > trenesDisp.size() - 1) {
 							System.out.println("Error al elegir el tren. Accion cancelada.");
@@ -71,7 +78,7 @@ public class CuentaLight extends Cuenta {
 								this.setSaldo(this.getSaldo() - precio);
 								Boleto nuevoBoleto = new Boleto(destinoElegido, trenElegido, indiceTrenOriginal, this.getNombre(), this.getApellido(), precio);
 								this.agregarBoleto(nuevoBoleto);
-								System.out.println("Has sacado el boleto con destino "+nuevoBoleto.getDestinoDelViaje().getNombreDeDestino()+".");
+								System.out.println("Has sacado el boleto con destino a "+nuevoBoleto.getDestinoDelViaje().getNombreDeDestino()+".");
 							}
 							else {
 								System.out.println("Saldos insuficientes. Recuerde ingresar saldo antes de sacar un pasaje.");

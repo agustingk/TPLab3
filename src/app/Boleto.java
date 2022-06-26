@@ -92,13 +92,28 @@ public class Boleto implements Serializable{
 		this.vencido = vencido;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		Formatter fmt = new Formatter();
 		fmt.format("%.2f", this.getPrecio());
 		return getClass().getName() + " {\n\tdestinoDelViaje: " + destinoDelViaje + "\n\ttrenSeleccionado: "
 				+ trenSeleccionado + "\n\tindiceTren: " + indiceTren + "\n\tnombre: " + nombre + "\n\tapellido: "
 				+ apellido + "\n\tprecio: " + fmt + "\n\tvencido: " + vencido + "\n}";
-	}
+	}*/
 
+	@Override
+	public String toString() {
+		String vencido="";
+		if(this.isVencido()) {
+			vencido = "Vencido";
+		}
+		else {
+			vencido = "No vencido";
+		}
+		Formatter fmt = new Formatter();
+		fmt.format("%.2f", this.getPrecio());
+		return "Boleto:"+"\nDestino del Viaje: "+this.getDestinoDelViaje()+"\nTren Seleccionado: "+this.getTrenSeleccionado()+"\nIndice del Tren: "+this.getIndiceTren()+"\nNombre del Titular del Boleto: "+this.getNombre()+ this.getApellido() +"\nPrecio del Boleto: "+ fmt +"\nEstado del Boleto: "+vencido;
+		
+	}
+	
 }

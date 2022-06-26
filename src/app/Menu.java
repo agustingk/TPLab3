@@ -12,13 +12,14 @@ import cuenta.Cuenta;
 import cuenta.CuentaAdmin;
 import cuenta.CuentaLight;
 import cuenta.CuentaPro;
+import exception.TerminalException;
 import json.JsonUtiles;
 import tren.Tren;
 import tren.TrenBala;
 
 public class Menu {
 	
-	public void visualMenuAdmin()
+	public void visualMenuAdmin() throws TerminalException
 	{
 		
 		Terminal nuevaTerminal = new Terminal();
@@ -95,7 +96,7 @@ public class Menu {
 							System.out.println("---------- "+ "Menu Inicio de Viaje" + " ----------");
 							System.out.println("---------- "+ "Lista de Destinos" + " ----------");
 							for(int i =0; i < nuevaTerminal.getListaDeDestinos().size(); i++) {
-								System.out.println("["+i+"]"+nuevaTerminal.getListaDeDestinos().get(i));
+								System.out.println("["+i+"]"+nuevaTerminal.getListaDeDestinos().get(i)+ "\n");
 							}					
 							System.out.println("Elija el [INDICE] del destino para inicar el viaje");
 							
@@ -116,7 +117,7 @@ public class Menu {
 								if(trenesDisp.size() > 0) {
 									System.out.println("---------- "+ "Lista de Trenes" + " ----------");
 									for(int i = 0; i < trenesDisp.size(); i++) {
-										System.out.println("["+i+"]" + trenesDisp.get(i));
+										System.out.println("["+i+"]" + trenesDisp.get(i)+"\n");
 									}
 									System.out.println("Elija el [INDICE] del tren para inicar el viaje a "+nuevaTerminal.getListaDeDestinos().get(opcionDestinoViaje).getNombreDeDestino());
 									
@@ -171,7 +172,7 @@ public class Menu {
 							if(trenesDisp.size() > 0) {
 								System.out.println("---------- "+ "Menu Terminado de Viaje" + " ----------");
 								for(int i = 0; i < trenesDisp.size(); i++) {
-									System.out.println("["+i+"]"+trenesDisp.get(i));
+									System.out.println("["+i+"]"+trenesDisp.get(i)+"\n");
 								}
 								
 								System.out.println("Elija el [INDICE] del tren que finalizara su viaje.");
@@ -615,7 +616,7 @@ public class Menu {
 		}
 	}
 	
-	public void menuMain()
+	public void menuMain() throws TerminalException
 	{
 		Terminal nuevaTerminal = new Terminal();
 		Scanner teclado=new Scanner(System.in);
@@ -675,9 +676,11 @@ public class Menu {
 			
 			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
 			System.out.println("Hola "+cuentaIngresada.getUser()+"!, que deseas hacer?...\n");
-			System.out.println("1.Comprar un boleto");
+			System.out.println("1.Comprar un Boleto");
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
+			System.out.println("4.Ver Datos");
+			System.out.println("5.Actualizar Datos");
 			System.out.println("\n0.Cerrar sesion");
 			
 			opcion = teclado.nextInt();
@@ -715,12 +718,22 @@ public class Menu {
 				nuevaTerminal = FileUtiles.leerTerminal();
 				if(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos().size() > 0) {
 					System.out.println("---------- "+ "Menu Boletos de Cuenta" + " ----------");
-					System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());					
+					System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).mostrarListaDeBoletos());					
 				}
 				else {
 					System.out.println("No tiene boletos comprados por el momento.");
 				}
-				break;				
+				break;
+			case 4:
+				System.out.println("---------- "+ "Datos de la Cuenta" + " ----------");
+				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).toString());
+				break;
+			case 5:
+				nuevaTerminal = FileUtiles.leerTerminal();
+				System.out.println("---------- "+ "Modificacion de Datos de la Cuenta" + " ----------");
+				nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).cambiarDatosDeUsuario();
+				FileUtiles.grabarTerminal(nuevaTerminal);
+				break;
 			case 0:
 				return;
 			default:
@@ -743,10 +756,12 @@ public class Menu {
 			
 			System.out.println("---------- "+ "Menu Cuenta" + " ----------");
 			System.out.println("Hola "+cuentaIngresada.getUser()+"!, que deseas hacer?...\n");
-			System.out.println("1.Comprar un boleto");
+			System.out.println("1.Comprar un Boleto");
 			System.out.println("2.Saldo");
 			System.out.println("3.Boletos");
-			System.out.println("4.Kilometros ganados");
+			System.out.println("4.Ver Datos");
+			System.out.println("5.Actualizar Datos");
+			System.out.println("6.Kilometros Ganados");
 			System.out.println("\n0.Cerrar sesion");
 			
 			opcion = teclado.nextInt();
@@ -784,12 +799,23 @@ public class Menu {
 				nuevaTerminal = FileUtiles.leerTerminal();
 				if(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos().size() > 0) {
 					System.out.println("---------- "+ "Menu Boletos de Cuenta" + " ----------");
-					System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).getListaDeBoletos());					
+					System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).mostrarListaDeBoletos());					
 				}
 				else {
 					System.out.println("No tiene boletos comprados por el momento.");
-				}	
+				}
+				break;
 			case 4:
+				System.out.println("---------- "+ "Datos de la Cuenta" + " ----------");
+				System.out.println(nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).toString());
+				break;
+			case 5:
+				nuevaTerminal = FileUtiles.leerTerminal();
+				System.out.println("---------- "+ "Modificacion de Datos de la Cuenta" + " ----------");
+				nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser()).cambiarDatosDeUsuario();
+				FileUtiles.grabarTerminal(nuevaTerminal);
+				break;
+			case 6:
 				nuevaTerminal = FileUtiles.leerTerminal();
 				System.out.println("---------- "+ "Menu Kilometros Ganados" + " ----------");
 				((CuentaPro) nuevaTerminal.getMapDeCuentas().get(cuentaIngresada.getUser())).canjearKilometrosGanados();
