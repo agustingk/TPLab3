@@ -57,7 +57,6 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		catch(InputMismatchException e) {
 			System.out.println("Ingrese un dato correcto!");
 		}
-		scan.close();
 	}
 	
 	public abstract double sacarBoleto(ArrayList<Tren> trenes, ArrayList<Destino> destinos);//// este metodo abstracto va a depender de cada subclase.
@@ -81,7 +80,7 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		else {
 			genero = "Femenino";
 		}
-		return "Cuenta: \n"+"Nombre: "+this.getNombre()+"\nApellido: "+this.getApellido()+"\nGenero: "+genero+"\nDNI: "+this.getDni()+"\nEdad: "+this.getEdad();
+		return "this.+: \n"+"Nombre: "+this.getNombre()+"\nApellido: "+this.getApellido()+"\nGenero: "+genero+"\nDNI: "+this.getDni()+"\nEdad: "+this.getEdad();
 	}
 
 	public String getUser() {

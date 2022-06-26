@@ -18,6 +18,7 @@ import json.JsonUtiles;
 
 import app.Boleto;
 import app.Destino;
+import app.FileUtiles;
 import exception.TerminalException;
 import tren.Tren;
 
@@ -34,6 +35,19 @@ public class CuentaAdmin extends Cuenta {
 		super(nombre, apellido, edad, user, pass, genero, dni);
 	}
 
+	public void eliminarCuenta(HashMap<String, Cuenta> cuentas, String buscado) {
+		if(cuentas.containsKey(buscado))
+		{
+			cuentas.remove(buscado);
+			System.out.println("°°La cuenta fue eliminada con exito°°");
+		}
+		else
+		{
+			System.out.println("El usuario es incorrecto o no existe");
+		}
+		
+	}
+	
 	public void agregarDestino(Destino destinoNuevo, ArrayList<Destino> destinos) {
 		if (destinoNuevo != null) {
 			if (destinos.contains(destinos)) {

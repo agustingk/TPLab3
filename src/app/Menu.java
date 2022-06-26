@@ -416,18 +416,10 @@ public class Menu {
 						break;
 					case 3:
 						if(nuevaTerminal.getMapDeCuentas().size() > 0) {
-							System.out.println("Ingrese el usuario que desea eliminar");
+							System.out.println("Ingrese el nombre de usuario de la cuenta que desea eliminar:");
 							buscado=teclado.next();
-							if(nuevaTerminal.getMapDeCuentas().containsKey(buscado))
-							{
-								nuevaTerminal.getMapDeCuentas().remove(buscado);
-								FileUtiles.grabarTerminal(nuevaTerminal);
-								System.out.println("°°La cuenta fue eliminada con exito°°");
-							}
-							else
-							{
-								System.out.println("El usuario es incorrecto o no existe");
-							}
+							nuevaTerminal.getAdmin().eliminarCuenta(nuevaTerminal.getMapDeCuentas(), buscado);
+							FileUtiles.grabarTerminal(nuevaTerminal);
 						}
 						else {
 							System.out.println("No hay cuentas cargadas en la base de datos actual.");
