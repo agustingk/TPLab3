@@ -22,11 +22,13 @@ public class Terminal implements Serializable {
 	private double recaudacion;
 	private CuentaAdmin admin;
 	private ArrayList<Destino> listaDeDestinos;
+	private ObjetoGenerico<Tren> listaDeCosas;
 	private ArrayList<Tren> listaDeTrenes;
 	private HashMap<String, Cuenta> mapDeCuentas;
 
 	public Terminal() {
 		this.listaDeDestinos = new ArrayList<Destino>();
+		this.listaDeCosas = new ObjetoGenerico<>();
 		this.listaDeTrenes = new ArrayList<Tren>();
 		this.mapDeCuentas = new HashMap<String, Cuenta>();
 		this.admin = new CuentaAdmin("nombre", "apellido", 0, "admin", "admin", 'm', "00000000");
@@ -38,11 +40,34 @@ public class Terminal implements Serializable {
 		this.admin = cuentaAdmin;
 		this.nombre = nombre;
 		this.direccion = direc;
+		this.listaDeCosas = new ObjetoGenerico<>();
 		this.listaDeDestinos = new ArrayList<Destino>();
 		this.listaDeTrenes = new ArrayList<Tren>();
 		this.mapDeCuentas = new HashMap<String, Cuenta>();
 	}
 	
+	public ObjetoGenerico<Tren> getListaDeCosas() {
+		return listaDeCosas;
+	}
+	
+	public String mostrarCosas() {
+		String cosas = "";
+		if(this.listaDeCosas.getLista().size() > 0) {
+			for(int i = 0; i < this.getListaDeCosas().getLista().size(); i++) {
+				cosas = cosas + this.getListaDeCosas().getLista().get(i)+"\n";
+			}
+		}
+		else {
+			cosas = "No hay datos permanentes cargados por el momento.";
+		}
+		return cosas;
+	}
+	
+
+	public void setListaDeCosas(ObjetoGenerico<Tren> listaDeCosas) {
+		this.listaDeCosas = listaDeCosas;
+	}
+
 	public void login() throws TerminalException {
 		Scanner scan = new Scanner(System.in);
 		String user="";
@@ -166,11 +191,17 @@ public class Terminal implements Serializable {
 		}
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return getClass().getName() + " {\n\tnombre: " + nombre + "\n\tdireccion: " + direccion + "\n\trecaudacion: "
 				+ recaudacion + "\n\tadmin: " + admin + "\n\tlistaDeDestinos: " + listaDeDestinos
 				+ "\n\tlistaDeTrenes: " + listaDeTrenes + "\n\tmapDeCuentas: " + mapDeCuentas + "\n}";
+	}*/
+	
+	@Override
+	public String toString() {
+		return "Terminal " +this.getNombre()+": "+"\n\nDireccion: "+this.getDireccion()+"\nRecaudacion: "+this.getRecaudacion()+"\nDestinos Disponibles: "+this.mostrarDestinos()+"\nLista de Trenes: "+this.mostrarTrenes()+"\nCuentas creadas: "+this.mostrarCuentas();
+		
 	}
 
 	public void agregarCuenta(Cuenta nuevaCuenta) {
@@ -227,12 +258,57 @@ public class Terminal implements Serializable {
 		return listaDeTrenes;
 	}
 
+	public String mostrarDestinos() {
+		String destinos = "";
+		if(this.getListaDeDestinos().size() > 0) {
+			for(int i = 0; i < this.getListaDeDestinos().size(); i++) {
+				destinos = destinos + this.getListaDeDestinos().get(i) + "\n\n";
+			}			
+		}
+		else {
+			destinos = "No hay destinos cargados actualmente en el sistema.";
+		}
+		return destinos;
+	}
+	
+	public String mostrarTrenes() {
+		String trenes = "";
+		if(this.getListaDeTrenes().size() > 0) {
+			for(int i = 0; i < this.getListaDeTrenes().size(); i++) {
+				trenes = trenes + this.getListaDeTrenes().get(i) + "\n";
+				if(i == this.getListaDeTrenes().size() - 1) {
+					
+				}
+				else {
+					trenes = trenes + "\n";
+				}
+			}
+		}
+		else {
+			trenes = "No hay trenes cargados en el sistema actual.";
+		}
+		return trenes;
+	}
+	
 	public void setListaDeTrenes(ArrayList<Tren> listaDeTrenes) {
 		this.listaDeTrenes = listaDeTrenes;
 	}
 
 	public HashMap<String, Cuenta> getMapDeCuentas() {
 		return mapDeCuentas;
+	}
+	
+	public String mostrarCuentas(){
+		String cuentas = "";
+		if(this.getMapDeCuentas().size() > 0) {
+			for(HashMap.Entry<String, Cuenta> entry : this.getMapDeCuentas().entrySet()) {
+				cuentas = cuentas + entry.getValue().getUser() +"\n"+ entry.getValue() + "\n\n";
+			}			
+		}
+		else {
+			cuentas = "No hay cuentas cargadas en el sistema.";
+		}
+		return cuentas;
 	}
 
 	public void setMapDeCuentas(HashMap<String, Cuenta> mapDeCuentas) {

@@ -112,7 +112,7 @@ public class Boleto implements Serializable{
 		}
 		Formatter fmt = new Formatter();
 		fmt.format("%.2f", this.getPrecio());
-		return "Boleto:"+"\nDestino del Viaje: "+this.getDestinoDelViaje()+"\nTren Seleccionado: "+this.getTrenSeleccionado()+"\nIndice del Tren: "+this.getIndiceTren()+"\nNombre del Titular del Boleto: "+this.getNombre()+ this.getApellido() +"\nPrecio del Boleto: "+ fmt +"\nEstado del Boleto: "+vencido;
+		return "Boleto:"+"\nDestino del Viaje: "+this.getDestinoDelViaje()+"\nTren Seleccionado: "+this.getTrenSeleccionado()+"\nIndice del Tren: "+this.getIndiceTren()+"\nNombre del Titular del Boleto: "+this.getNombre() +" "+ this.getApellido() +"\nPrecio del Boleto: "+ fmt +"\nEstado del Boleto: "+vencido;
 		
 	}
 	

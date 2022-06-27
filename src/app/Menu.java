@@ -64,6 +64,7 @@ public class Menu {
 					//System.out.println("\n3.Eliminar una terminal"); inecesariamente destructivo
 					System.out.println("3.Iniciar viaje");
 					System.out.println("4.Terminar viaje");
+					System.out.println("5.Mostrar Lista Permanente de Trenes");
 					System.out.println("\n0.Atras");
 					try {
 					subOpcion=teclado.nextInt();
@@ -206,6 +207,10 @@ public class Menu {
 							System.out.println("No hay viajes en el momento.");
 						}
 						break;
+					case 5:
+						System.out.println("---------- "+ "Lista Permanente" + " ----------");
+						System.out.println(nuevaTerminal.getAdmin().mostrarListaPermanente(nuevaTerminal.getListaDeCosas()));
+						break;
 					case 0:
 						break;
 					default:
@@ -237,7 +242,7 @@ public class Menu {
 					case 1:
 						if(nuevaTerminal.getListaDeTrenes().size() > 0) {
 							System.out.println("---------- "+ "Lista de Trenes" + " ----------");
-							System.out.println(nuevaTerminal.getListaDeTrenes());
+							System.out.println(nuevaTerminal.mostrarTrenes());
 						}
 						else {
 							System.out.println("No hay trenes cargados en la base de datos actual.");
@@ -274,7 +279,9 @@ public class Menu {
 							System.out.println("Ya existe este tren en la terminal.");
 						}
 						else {
-							nuevaTerminal.getListaDeTrenes().add(nuevo);
+							///nuevaTerminal.getListaDeTrenes().add(nuevo);
+							nuevaTerminal.getAdmin().agregarTren(nuevo, nuevaTerminal.getListaDeTrenes());
+							nuevaTerminal.getAdmin().agregarCosa(nuevo, nuevaTerminal.getListaDeCosas());
 							FileUtiles.grabarTerminal(nuevaTerminal);
 							System.out.println("°°El tren fue creado con exito°°");
 						}
@@ -349,13 +356,13 @@ public class Menu {
 							}
 							System.out.println("Ingrese el [INDICE] del tren que quiere eliminar del sistema: ");
 							try {
-							indice=teclado.nextInt();
+								indice=teclado.nextInt();
 							}
 							catch(InputMismatchException h) {
 								System.out.println("Ingrese el tipo de dato correcto");
 							}
-							if(indice <= nuevaTerminal.getListaDeTrenes().size()){
-								nuevaTerminal.getListaDeTrenes().remove(indice);
+							if(indice <= nuevaTerminal.getListaDeTrenes().size() - 1){
+								nuevaTerminal.getAdmin().quitarTren(indice, nuevaTerminal.getListaDeTrenes());
 								for(HashMap.Entry<String, Cuenta> entry : nuevaTerminal.getMapDeCuentas().entrySet()) {
 									for(int cont=0; cont < entry.getValue().getListaDeBoletos().size(); cont++) {
 										if(entry.getValue().getListaDeBoletos().get(cont).getIndiceTren() == indice) {
@@ -403,7 +410,7 @@ public class Menu {
 					case 1:
 						if(nuevaTerminal.getMapDeCuentas().size() > 0) {
 							System.out.println("---------- "+ "Lista de Cuentas" + " ----------");
-							System.out.println(nuevaTerminal.getMapDeCuentas());
+							System.out.println(nuevaTerminal.mostrarCuentas());
 						}
 						else {
 							System.out.println("No hay cuentas cargadas en la base de datos actual.");
@@ -451,7 +458,8 @@ public class Menu {
 					{
 					case 1:
 						if(nuevaTerminal.getListaDeDestinos().size() > 0) {
-							System.out.println(nuevaTerminal.getListaDeDestinos());
+							System.out.println("---------- "+ "Lista de Destinos" + " ----------");
+							System.out.println(nuevaTerminal.mostrarDestinos());
 						}
 						else {
 							System.out.println("No hay destinos cargados en la base de datos actual");
@@ -476,7 +484,7 @@ public class Menu {
 							System.out.println("Este destino ya se encuentra cargado.");
 						}
 						else {
-							nuevaTerminal.getListaDeDestinos().add(nuevo);
+							nuevaTerminal.getAdmin().agregarDestino(nuevo, nuevaTerminal.getListaDeDestinos());
 							FileUtiles.grabarTerminal(nuevaTerminal);
 							System.out.println("°°El destino fue creado con exito°°");
 						}
@@ -533,7 +541,7 @@ public class Menu {
 					case 4:
 						if(nuevaTerminal.getListaDeDestinos().size() > 0) {
 							for(int i = 0; i < nuevaTerminal.getListaDeDestinos().size(); i++) {
-								System.out.println("["+i+"]"+nuevaTerminal.getListaDeDestinos().get(i));
+								System.out.println("["+i+"]"+nuevaTerminal.getListaDeDestinos().get(i) + "\n");
 							}
 							
 							System.out.println("Ingrese el [INDICE] del destino que quiere eliminar: ");
@@ -545,7 +553,7 @@ public class Menu {
 								System.out.println("Ingrese un tipo de dato correcto");
 							}
 							if(buscado <= nuevaTerminal.getListaDeDestinos().size() - 1) {
-								nuevaTerminal.getListaDeDestinos().remove(buscado);
+								nuevaTerminal.getAdmin().quitarDestino(buscado, nuevaTerminal.getListaDeDestinos());
 								FileUtiles.grabarTerminal(nuevaTerminal);
 								System.out.println("°°El destino fue eliminado con exito°°");	
 							}

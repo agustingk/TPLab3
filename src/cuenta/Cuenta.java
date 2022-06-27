@@ -80,7 +80,7 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		else {
 			genero = "Femenino";
 		}
-		return "this.+: \n"+"Nombre: "+this.getNombre()+"\nApellido: "+this.getApellido()+"\nGenero: "+genero+"\nDNI: "+this.getDni()+"\nEdad: "+this.getEdad();
+		return "Nombre: "+this.getNombre()+"\nApellido: "+this.getApellido()+"\nGenero: "+genero+"\nDNI: "+this.getDni()+"\nEdad: "+this.getEdad();
 	}
 
 	public String getUser() {
@@ -112,7 +112,7 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		
 		if(this.getListaDeBoletos().size() > 0) {
 			for(int i = 0; i < this.getListaDeBoletos().size(); i++) {
-				boletos = boletos + this.getListaDeBoletos().get(i)+ "\n\n";
+				boletos = boletos + this.mostrarBoletos()+ "\n\n";
 			}
 		}
 		else {
@@ -127,6 +127,20 @@ public abstract class Cuenta extends Persona implements Serializable, Jsoneable{
 		return this.listaDeBoletos;
 	}
 
+	public String mostrarBoletos() {
+		String boletos = "";
+		if(this.getListaDeBoletos().size() > 0) {
+			for(int i = 0; i < this.getListaDeBoletos().size(); i++) {
+				boletos = boletos + this.getListaDeBoletos().get(i) + "\n";
+			}
+		}
+		else {
+			boletos = "No tienes boletos comprados.";
+		}
+		return boletos;
+	}
+	
+	
 	@Override
 	public JSONObject toJson() {
 		JSONObject nuevaCuenta = new JSONObject();

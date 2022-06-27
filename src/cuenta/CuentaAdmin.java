@@ -19,6 +19,7 @@ import json.JsonUtiles;
 import app.Boleto;
 import app.Destino;
 import app.FileUtiles;
+import app.ObjetoGenerico;
 import exception.TerminalException;
 import tren.Tren;
 
@@ -46,6 +47,25 @@ public class CuentaAdmin extends Cuenta {
 			System.out.println("El usuario es incorrecto o no existe");
 		}
 		
+	}
+	
+	public String mostrarListaPermanente(ObjetoGenerico<Tren> lista) {
+		String elReturn = "";
+		
+		if(lista != null) {
+			if(lista.getLista().size() > 0) {
+				for(int i = 0; i < lista.getLista().size(); i++) {
+					elReturn = elReturn + lista.getLista().get(i).toString() + "\n";
+				}
+				return elReturn;
+			}
+			else {
+				return "La lista permanente se encuentra vacia.";
+			}
+		}
+		else {
+			return "La lista permanente se encuentra vacia.";
+		}
 	}
 	
 	public void agregarDestino(Destino destinoNuevo, ArrayList<Destino> destinos) {
@@ -83,6 +103,18 @@ public class CuentaAdmin extends Cuenta {
 			}
 		}
 	}
+	
+	public void agregarCosa(Tren trenNuevo, ObjetoGenerico<Tren> elemento) {
+		if (elemento.getLista() != null) {
+			if (elemento.getLista().contains(trenNuevo)) {
+				//System.out.println("Este tren ya esta cargado en el sistema!");
+			} else {
+				elemento.getLista().add(trenNuevo);
+				//System.out.println("Tren ingresado en la terminal!");
+			}
+		}
+	}
+	
 
 	public void quitarTren(int indiceDeTren, ArrayList<Tren> trenes) {//// indiceDeTren seria la posicion que ocupa el
 																		//// tren que se desea eliminar en la
@@ -168,8 +200,72 @@ public class CuentaAdmin extends Cuenta {
 
 	@Override
 	public double sacarBoleto(ArrayList<Tren> trenes, ArrayList<Destino> destinos) {/// sacar boleto para el admin no deberia restar saldo. Seria sacar un boleto
-									/// gratis.
-		// TODO Auto-generated method stub
+		Scanner scan = new Scanner(System.in);
+		int indiceTren, indiceDestino, indiceTrenOriginal=0;
+		Destino destinoElegido = new Destino();
+		Tren trenElegido = new Tren();
+		ArrayList<Tren> trenesDisp = new ArrayList<Tren>();
+		
+		if(destinos.size() > 0) {
+			System.out.println("Seleccione el [INDICE] del destino: ");
+			
+			for(int i = 0; i < destinos.size(); i++) {
+				System.out.println("["+i+"]" + "\n" + destinos.get(i));
+			}
+			
+			try {
+				indiceDestino = scan.nextInt();
+				if(indiceDestino > destinos.size() - 1) {
+					System.out.println("Error al elegir el destino. Asegurese de seleccionar el [INDICE] correcto.");
+				}
+				else {
+					destinoElegido = destinos.get(indiceDestino);
+					System.out.println("\n");
+					System.out.println("Seleccione el [INDICE] de la lista de trenes disponibles para "+destinoElegido.getNombreDeDestino()+": ");
+					for(int i = 0; i < trenes.size(); i++) {
+						if(trenes.get(i).getDistanciaMaxima() >= destinoElegido.getDistanciaEnKilometros()) {
+							if(!trenes.get(i).getEnViaje()) {
+								trenesDisp.add(trenes.get(i));
+							}
+						}
+					}
+					if(trenesDisp.size() == 0) {
+						System.out.println("No hay trenes disponibles por el momento.");
+					}
+					else {
+						for(int i = 0; i < trenesDisp.size(); i++) {
+							System.out.println("["+i+"]" + "\n" + trenesDisp.get(i));
+						}
+						
+						indiceTren = scan.nextInt();
+						if(indiceTren > trenesDisp.size() - 1) {
+							System.out.println("Error al elegir el tren. Accion cancelada.");
+						}
+						else {
+							trenElegido = trenesDisp.get(indiceTren);
+							
+							for(int f=0; f < trenes.size(); f++) {
+								if(trenElegido.equals(trenes.get(f))) {
+									indiceTrenOriginal = f;
+								}
+							}
+									
+							Boleto nuevoBoleto = new Boleto(destinoElegido, trenElegido, indiceTrenOriginal, this.getNombre(), this.getApellido(), 0);
+							this.agregarBoleto(nuevoBoleto);
+							System.out.println("Has sacado el boleto con destino a "+nuevoBoleto.getDestinoDelViaje().getNombreDeDestino()+".");
+
+						}
+				}
+				}
+			}
+			catch(InputMismatchException e) {
+				System.out.println("Error al elegir el tren. Accion cancelada.");
+			}
+		}
+		else {
+			System.out.println("No hay destinos disponibles por el momento.");
+		}
+	
 		return 0;
 	}
 
