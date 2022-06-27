@@ -10,7 +10,7 @@ import cuenta.Cuenta;
 import cuenta.CuentaAdmin;
 import cuenta.CuentaLight;
 import cuenta.CuentaPro;
-import exception.TerminalException;
+import exception.CustomException;
 import tren.Tren;
 
 ///Terminal:
@@ -68,7 +68,7 @@ public class Terminal implements Serializable {
 		this.listaDeCosas = listaDeCosas;
 	}
 
-	public void login() throws TerminalException {
+	public void login() throws CustomException {
 		Scanner scan = new Scanner(System.in);
 		String user="";
 		String pass="";
@@ -159,15 +159,15 @@ public class Terminal implements Serializable {
 		}
 	}
 	
-	public Cuenta buscarCuentaEnTerminal(String user, String pass) {
+	public Cuenta buscarCuentaEnTerminal(String user, String pass) throws CustomException {
 		if(this.admin != null) {	
 			if(this.admin.getUser().equals(user)) {
 				if(this.admin.getPass().equals(pass)) {
 					return this.admin;
 				}
 				else {
-					System.out.println("Clave incorrecta !");
-					return null;
+					throw new CustomException("Clave incorrecta !");
+					///return null;
 				}
 			}
 			else { 

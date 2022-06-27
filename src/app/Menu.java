@@ -12,14 +12,14 @@ import cuenta.Cuenta;
 import cuenta.CuentaAdmin;
 import cuenta.CuentaLight;
 import cuenta.CuentaPro;
-import exception.TerminalException;
+import exception.CustomException;
 import json.JsonUtiles;
 import tren.Tren;
 import tren.TrenBala;
 
 public class Menu {
 	
-	public void visualMenuAdmin() throws TerminalException
+	public void visualMenuAdmin()
 	{
 		
 		Terminal nuevaTerminal = new Terminal();
@@ -616,7 +616,7 @@ public class Menu {
 		}
 	}
 	
-	public void menuMain() throws TerminalException
+	public void menuMain()
 	{
 		Terminal nuevaTerminal = new Terminal();
 		Scanner teclado=new Scanner(System.in);
@@ -648,7 +648,12 @@ public class Menu {
 			}
 			switch(opcion) {
 			case 1:
-				nuevaTerminal.login();
+				try {
+					nuevaTerminal.login();
+				}catch (CustomException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();///muestra en que parte del codigo surgio el error.
+				}					
 				break;
 			case 2:
 				nuevaTerminal.registrarCuenta();
